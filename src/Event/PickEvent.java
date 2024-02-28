@@ -16,8 +16,14 @@ public class PickEvent extends Event{
 	public void execute() {
 		super.execute();
 		state.update(this);
-		//Uppdatera StoreState med relevant information
-		//lägg till i Queue ett nytt PayEvent
+		
+		//TODO: Fixa FIFO kö
+		// om ((StoreState)state).getCheckoutQueue().size() == ((StoreState)state).getMaxCheckoutCapacity()
+			//Lägg till kund i kö
+			//Kön hanteras i payEvent
+		
+		//Annars
+			//Skapa payEvent
 	}
 
 }

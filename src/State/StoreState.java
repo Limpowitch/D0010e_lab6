@@ -11,6 +11,8 @@ public class StoreState extends State{
     private int customersInStore;
     private int highestCustomerID;
     private int missedCustomers;
+    private CheckoutQueue checkoutQueue;
+    private int maxCheckoutCapacity;
 	private long seed;
 	private double lambda;
 	private double pickLow;
@@ -29,6 +31,7 @@ public class StoreState extends State{
 		this.customersInStore = 0;
 		this.missedCustomers = 0;
 		highestCustomerID = -1;
+        checkoutQueue = new CheckoutQueue();
         arrivalTime = new ArrivalTime(lambda, seed);
         pickTime = new PickTime(pickLow, pickHigh, seed);
         payTime = new PayTime(payLow, payHigh, seed);
@@ -56,6 +59,14 @@ public class StoreState extends State{
 	
 	public int returnMaxCapacity() {
 		return this.maxCapacity;
+	}
+	
+	public int getMaxCheckoutCapacity() {
+		return this.maxCheckoutCapacity;
+	}
+	
+	public CheckoutQueue getCheckoutQueue() {
+		return this.checkoutQueue;
 	}
 	
 	public void updateMissedCustomers() {

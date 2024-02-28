@@ -27,18 +27,21 @@ public class ArrivalEvent extends Event{
 			
 			((StoreState)state).updateStoreCount(true); // ökar antalet i affären med 1
 			
+			//Lägg till i Queue ett nytt arrivalEvent
 			eventQueue.addToQueue(new ArrivalEvent((StoreState)state, ((StoreState)state).returnArrivalTime(), eventQueue));
+			//Lägg till i Queue ett nytt pickEvent
 			eventQueue.addToQueue(new PickEvent((StoreState)state, ((StoreState)state).returnPickTime(), eventQueue, customer));
 			
 		} else if (((StoreState)state).returnOpenStatus() 
 			&& ((StoreState)state).returnCustomersInStore() == ((StoreState)state).returnMaxCapacity()) {
 			
-			((StoreState)state).updateMissedCustomers();
+			((StoreState)state).updateMissedCustomers(); // Ökar missade antalet kunder med 1
+			
+			//Lägg till i Queue ett nytt arrivalEvent
 			eventQueue.addToQueue(new ArrivalEvent((StoreState)state, ((StoreState)state).returnArrivalTime(), eventQueue));
 			
 		} 
 		
-		//Lägg till i Queue ett nytt pickEvent
 	}
 
 	
