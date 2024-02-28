@@ -1,5 +1,7 @@
 package General;
 
-public class View {
+import java.util.Observable;
 
+public class View extends Observable {
+	
 }
