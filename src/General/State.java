@@ -13,7 +13,7 @@ public class State {
 		this.isRunning = false;
 	}
 	
-	public boolean isStopped() {
+	public boolean isRunning() {
 		return this.isRunning;
 	}
 	
