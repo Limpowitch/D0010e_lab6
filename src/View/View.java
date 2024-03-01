@@ -6,7 +6,8 @@ import General.EventQueue;
 import java.util.Observable;
 
 public class View extends Observable {
-	
+	public View() {
+	}
 	// En idé är att Simulator observerar storestate (eller whatever)
 	// och när den "upptäcker ändring" anropar den denna metod i vy.
 	// Vi tar det på måndag eller över dc.

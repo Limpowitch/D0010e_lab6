@@ -92,7 +92,7 @@ public class StoreState extends State{
 	}
 	
 	public Customer generatedCustomer() {
-		return new Customer(this.highestCustomerID + 1);
+		return null;//new Customer(this.highestCustomerID + 1);
 	}
 	
 	

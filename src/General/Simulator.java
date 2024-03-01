@@ -1,6 +1,7 @@
 package General;
 
 import View.View;
+import General.Event;
 
 public class Simulator {
 	protected State state;
@@ -15,21 +16,23 @@ public class Simulator {
 	
 	public void run() {
 		view.printBeginStore();
-		/* Borde fungera samt snyggare. Men kolla gärna igenom
-		 * Vi behöver i så fall inte alla grejjer i state
+		// Borde fungera samt snyggare. Men kolla gärna igenom
+		// Vi behöver i så fall inte alla grejjer i state
 		for (Event event : eventQueue) {
 		    event.execute();
+		    eventQueue.remove(event);
 		}
-		*/
+		
+		/*
 		while (state.isRunning) {
 			if (eventQueue.size() == 0) {
 				state.stopSim();
 			}  else {
 				eventQueue.get(0).execute();
+				eventQueue.remove(0);
 			}
-			eventQueue.remove(0);
 			
-		}
+		}*/
 		//Plocka ut 0:e Event i Eventqueue, kör execute
 		//Ta bort 0:e Event i EventQueue
 	}

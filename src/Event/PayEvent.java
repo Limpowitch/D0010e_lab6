@@ -9,8 +9,8 @@ public class PayEvent extends Event{
 	protected Customer customer;
 
 
-	public PayEvent(State state, double executeTime, EventQueue eventQueue, Customer customer) {
-		super(state, executeTime, eventQueue);
+	public PayEvent(State state, double executeTime, Customer customer) {
+		super(state, executeTime, customer);
 		// TODO Auto-generated constructor stub
 	}
 

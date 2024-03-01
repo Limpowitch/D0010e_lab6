@@ -8,8 +8,8 @@ import State.Customer;
 public class PickEvent extends Event{
 	protected Customer customer;
 
-	public PickEvent(State state, double executeTime, EventQueue eventQueue, Customer customer) {
-		super(state, executeTime, eventQueue);
+	public PickEvent(State state, double executeTime, Customer customer) {
+		super(state, executeTime, customer);
 		// TODO Auto-generated constructor stub
 	}
 	

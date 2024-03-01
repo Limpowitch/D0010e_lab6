@@ -6,8 +6,8 @@ import General.State;
 
 public class CloseEvent extends Event{
 
-	public CloseEvent(State state, double executeTime, EventQueue eventQueue) {
-		super(state, executeTime, eventQueue);
+	public CloseEvent(State state, double executeTime) {
+		super(state, executeTime);
 		// TODO Auto-generated constructor stub
 	}
 	

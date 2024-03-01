@@ -6,9 +6,9 @@ import General.State;
 
 public class StartEvent extends Event {
 
-	public StartEvent(State state, double executeTime, EventQueue eventQueue) {
-		super(state, executeTime, eventQueue);
-		// TODO Auto-generated constructor stub
+	public StartEvent(State state, double executeTime) {
+		super(state, executeTime);
+		
 	}
 	
 	public void execute() {

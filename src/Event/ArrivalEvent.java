@@ -6,8 +6,8 @@ import General.State;
 
 public class ArrivalEvent extends Event{
 
-	public ArrivalEvent(State state, double executeTime, EventQueue eventQueue) {
-		super(state, executeTime, eventQueue);
+	public ArrivalEvent(State state, double executeTime) {
+		super(state, executeTime);
 		// TODO Auto-generated constructor stub
 	}
 	
