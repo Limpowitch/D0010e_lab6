@@ -10,12 +10,14 @@ public class EventQueue extends ArrayList<Event> {
 	
 	//Lägger till event i queue
 	public void addToQueue(Event event) {
-		//Sortera efter executeTime
-		//executeTime för ett specifikt event går att få genom returnExecuteTime()
-		
+		// Om this i:te elements ExTime är större än eventets ExTime,
+		// lägg till event på i:te plats i this.
+		for (int i = 0; i < this.size(); i++) {
+			if (this.get(i).returnExecuteTime() > event.returnExecuteTime()) {
+                this.add(i, event);
+            }
+        }
 	}
-	
 	//Vi behöver ingen metod för removeFromQueue.
 	//Då EventQueue är en ArrayList, så kan Simulator använda sig av .remove
-	
 }
