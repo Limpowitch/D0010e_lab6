@@ -7,6 +7,7 @@ public class Simulator {
 	protected State state;
 	protected EventQueue eventQueue;
 	protected View view;
+	private String eventName;
 	
 	public Simulator(State state, EventQueue eventQueue, View view) {
 		this.eventQueue = eventQueue;
@@ -16,23 +17,20 @@ public class Simulator {
 	
 	public void run() {
 		view.printBeginStore();
-		// Borde fungera samt snyggare. Men kolla gärna igenom
-		// Vi behöver i så fall inte alla grejjer i state
-		for (Event event : eventQueue) {
-		    event.execute();
-		    eventQueue.remove(event);
-		}
-		
-		/*
+		// nu lägger vi till ett startevent
+		eventQueue.addToQueue(new Event(state, 0));
 		while (state.isRunning) {
+			view.printStoreState();
 			if (eventQueue.size() == 0) {
 				state.stopSim();
-			}  else {
-				eventQueue.get(0).execute();
-				eventQueue.remove(0);
+				continue;
 			}
+			eventName = eventQueue.get(0).getClass().getSimpleName();
+			view.updateCurrentEvent(eventName);
+			eventQueue.remove(0);
 			
-		}*/
+			view.printEndStore();
+		}
 		//Plocka ut 0:e Event i Eventqueue, kör execute
 		//Ta bort 0:e Event i EventQueue
 	}

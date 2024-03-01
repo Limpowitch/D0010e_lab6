@@ -15,6 +15,7 @@ public class View extends Observable {
 	private CheckoutQueue kassakö;
 	private String händelse;
 	private String isOpen;
+	private String currentEventName;
 	private int antalKassor;
 	private int maxSomRyms;
 	private int kund;
@@ -33,7 +34,6 @@ public class View extends Observable {
 	private long frö;
 	public View (StoreState storeState, EventQueue eventQueue) {
 		kassakö = storeState.getCheckoutQueue();
-		händelse = this.getEventName();
 		isOpen = storeState.getOpenStatus()? "Ö" : "S";
 		antalKassor = 0;
 		maxSomRyms = storeState.getMaxCapacity();
@@ -53,8 +53,8 @@ public class View extends Observable {
 		frö = storeState.getSeed();
 	}
 
-	public String getEventName() {
-		return eventQueue.get(0).getClass().getSimpleName();
+	public void updateCurrentEvent(String eventName) {
+		currentEventName = eventName;
 	}
 	
 	public void printBeginStore() {
@@ -73,10 +73,33 @@ public class View extends Observable {
 		System.out.print(openingMessage);
 	}
 	public void printStoreState() {
-		
+		String updatingMessage =
+				"0,00 "
+				+ currentEventName + " " 
+				+ "0 "
+				+ isOpen + " " 
+				+ "2 "
+				+ "0.87 "
+				+ "0 "
+				+ "0 "
+				+ "0 "
+				+ "0 "
+				+ "0,00 "
+				+ "0 "
+				+ "[]\n\n";
+		System.out.print(updatingMessage);
     }
 	public void printEndStore() {
-        
+        String closingMessage = 
+        		"RESULTAT\n"
+        		+ "========\n"
+        		+ "1) Av 10 kunder handlade 8 medan 2 missades.\n"
+        		+ "2) Total tid 2 kassor varit lediga: 6,11 te.\n"
+        		+ "Genomsnittlig ledig kassatid: 3,06 te (dvs 23,03% av tiden från öppning tills sista kunden\n"
+        		+ "betalat).\n"
+        		+ "3) Total tid 5 kunder tvingats köa: 13,60 te.\n"
+        		+ "Genomsnittlig kötid: 2,72 te.\n";
+        System.out.print(closingMessage);
     }
 	
 }

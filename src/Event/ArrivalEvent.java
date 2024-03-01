@@ -12,7 +12,7 @@ public class ArrivalEvent extends Event{
 	}
 	
 	public void execute() {
-		super.execute();
+		super.execute(new PickEvent(state, executeTime, customer, eventQueue));
 		state.update(this); //uppdaterar klockan
 		//Lägg till i Queue ett nytt ArrivalEvent
 		//Lägg till i Queue ett nytt pickEvent

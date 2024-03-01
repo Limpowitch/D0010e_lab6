@@ -6,6 +6,7 @@ public class Event {
 	
 	protected State state;
 	protected Customer customer;
+	protected EventQueue eventQueue;
 	protected double executeTime;
 	
 	public Event(State state, double executeTime) {
@@ -13,14 +14,15 @@ public class Event {
 		this.executeTime = executeTime;
 	}
 	
-	public Event(State state, double executeTime, Customer customer) {
+	public Event(State state, double executeTime, Customer customer, EventQueue eventQueue) {
 		this.state = state;
 		this.executeTime = executeTime;
 		this.customer = customer;
+		this.eventQueue = eventQueue;
 	}
 	
-	public void execute() {
-		//Generell funktion för event instruktioner
+	public void execute(Event event) {
+			eventQueue.addToQueue(event);
 	}
 	
 	public double returnExecuteTime() {

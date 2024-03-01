@@ -15,7 +15,7 @@ public class PayEvent extends Event{
 	}
 
 	public void execute() {
-		super.execute();
+		super.execute(new EndEvent(state, executeTime, customer, eventQueue));
 		state.update(this);
 		//Uppdatera StoreState med relevant information
 	}

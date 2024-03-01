@@ -14,7 +14,7 @@ public class PickEvent extends Event{
 	}
 	
 	public void execute() {
-		super.execute();
+		super.execute(new payEvent(state, executeTime, customer, eventQueue));
 		state.update(this);
 		//Uppdatera StoreState med relevant information
 		//lägg till i Queue ett nytt PayEvent

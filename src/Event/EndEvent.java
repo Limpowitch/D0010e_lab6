@@ -12,7 +12,6 @@ public class EndEvent extends Event{
 	}
 	
 	public void execute() {
-		super.execute();
 		state.update(this);
 		//Uppdatera StoreState med relevant information
 	}
