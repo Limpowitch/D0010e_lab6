@@ -6,8 +6,6 @@ import General.EventQueue;
 import java.util.Observable;
 
 public class View extends Observable {
-	public View() {
-	}
 	// En idé är att Simulator observerar storestate (eller whatever)
 	// och när den "upptäcker ändring" anropar den denna metod i vy.
 	// Vi tar det på måndag eller över dc.
@@ -32,7 +30,8 @@ public class View extends Observable {
 	private double tid;
 	private double ankomsttid;
 	private long frö;
-	public View (StoreState storeState, EventQueue eventQueue) {
+	
+	public View (StoreState storeState) {
 		kassakö = storeState.getCheckoutQueue();
 		isOpen = storeState.getOpenStatus()? "Ö" : "S";
 		antalKassor = 0;
@@ -89,7 +88,7 @@ public class View extends Observable {
 				+ "[]\n\n";
 		System.out.print(updatingMessage);
     }
-	public void printEndStore() {
+	public void printCloseStore() {
         String closingMessage = 
         		"RESULTAT\n"
         		+ "========\n"

@@ -1,5 +1,6 @@
 package Main;
 
+import State.StoreState;
 import General.Simulator;
 import General.State;
 import General.EventQueue;
@@ -8,20 +9,23 @@ import Event.EndEvent;
 import View.View;
 
 public class RunSim {
-	private Simulator simulator;
+	/*private Simulator simulator;
 	
 	public RunSim(Simulator simulator) {
 		this.simulator = simulator;
-	}
+	}*/
 	public static void main(String[] args) {
 		// Simulator 1 //
-		RunSim runSim1 = new RunSim(new Simulator(new State(), new EventQueue(), new View()));
+		State state1 = new State();
+		// StoreState(lambda, seed, maxCapacity)
+		StoreState storeState1 = new StoreState(1.0, 1234, 5);
+		View view1 = new View(storeState1);
+		EventQueue eventQueue1 = new EventQueue();
+		Simulator simulator = new Simulator(state1, new EventQueue(), view1, storeState1);
 		
-		Simulator simulator1 = runSim1.simulator.getSimulator();
-		
-		simulator1.initializeEventQueue(new StartEvent(simulator1.getState(), 0), 
-									   new EndEvent(simulator1.getState(), 999));
-		simulator1.run();
+		simulator.initializeEventQueue(new StartEvent(state1, 0), 
+									   new EndEvent(state1, 999));
+		simulator.run();
 		/////////////////
     }
 }

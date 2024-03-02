@@ -17,7 +17,7 @@ public class Event {
 			eventQueue.addToQueue(event);
 	}
 	
-	public double returnExecuteTime() {
+	public double getExecuteTime() {
 		//Returnerar eventets executeTime
 		return this.executeTime;
 	}
