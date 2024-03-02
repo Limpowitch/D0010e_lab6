@@ -1,7 +1,11 @@
 package State;
 
 public class Customer {
-	
-	//En customer är bara ett customerID
-	public int customerID;
+	private static int customerID = 1;
+	public int getCostumerID () {
+		return customerID;
+	}
+	public void updateCostumerID () {
+        customerID++;
+    }
 }

@@ -15,10 +15,13 @@ public class Simulator {
 		this.view = view;
 	}
 	
+	public void initializeEventQueue(Event startEvent, Event endEvent) {
+		eventQueue.addToQueue(startEvent);
+		eventQueue.addToQueue(endEvent);
+	}
+	
 	public void run() {
 		view.printBeginStore();
-		// nu lägger vi till ett startevent
-		eventQueue.addToQueue(new Event(state, 0));
 		while (state.isRunning) {
 			view.printStoreState();
 			if (eventQueue.size() == 0) {
@@ -29,8 +32,8 @@ public class Simulator {
 			view.updateCurrentEvent(eventName);
 			eventQueue.remove(0);
 			
-			view.printEndStore();
 		}
+		view.printEndStore();
 		//Plocka ut 0:e Event i Eventqueue, kör execute
 		//Ta bort 0:e Event i EventQueue
 	}
