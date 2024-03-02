@@ -1,7 +1,6 @@
 package General;
 
 import View.View;
-import General.Event;
 
 public class Simulator {
 	protected State state;
@@ -21,7 +20,10 @@ public class Simulator {
 	}
 	
 	public void run() {
+		//Plocka ut 0:e Event i Eventqueue, kör execute
+		//Ta bort 0:e Event i EventQueuex
 		view.printBeginStore();
+		System.out.println("\n" + eventQueue.toString() + "\n");
 		while (state.isRunning) {
 			view.printStoreState();
 			if (eventQueue.size() == 0) {
@@ -34,9 +36,15 @@ public class Simulator {
 			
 		}
 		view.printEndStore();
-		//Plocka ut 0:e Event i Eventqueue, kör execute
-		//Ta bort 0:e Event i EventQueue
 	}
+	
+	public Simulator getSimulator() {
+		return this;
+	}
+	
+	public State getState() {
+        return state;
+    }
 
 }
 
