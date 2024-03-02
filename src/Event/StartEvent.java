@@ -3,16 +3,17 @@ package Event;
 import General.Event;
 import General.EventQueue;
 import General.State;
-import State.Customer;
+import State.NewCustomer;
 
 public class StartEvent extends Event {
-
-	public StartEvent(State state, double executeTime, Customer customer, EventQueue eventQueue) {
-		super(state, executeTime, customer, eventQueue);
+	NewCustomer customer;
+	
+	public StartEvent(State state, double executeTime) {
+		super(state, executeTime);
 	}
 	
 	public void execute() {
-		super.execute(new ArrivalEvent(state, executeTime, customer, eventQueue));
+		super.execute(new ArrivalEvent(state, executeTime, customer));
 		state.update(this); // Vi uppdaterar state klockan med executeTime
 		//Uppdatera StoreState med relevant information
 		//Lägg till ArrivalEvent i Queue

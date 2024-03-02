@@ -1,21 +1,18 @@
 package Event;
 
 import General.Event;
-import General.EventQueue;
 import General.State;
-import State.Customer;
+import State.NewCustomer;
 
 public class PayEvent extends Event{
-	protected Customer customer;
-
-
-	public PayEvent(State state, double executeTime, Customer customer) {
-		super(state, executeTime, customer);
-		// TODO Auto-generated constructor stub
+	NewCustomer customer;
+	public PayEvent(State state, double executeTime, NewCustomer customer) {
+		super(state, executeTime);
+		this.customer = customer;
 	}
 
 	public void execute() {
-		super.execute(new EndEvent(state, executeTime, customer, eventQueue));
+		super.execute(new CloseEvent(state, executeTime, customer));
 		state.update(this);
 		//Uppdatera StoreState med relevant information
 	}

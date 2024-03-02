@@ -1,18 +1,19 @@
 package Event;
 
 import General.Event;
-import General.EventQueue;
 import General.State;
+import State.NewCustomer;
 
 public class ArrivalEvent extends Event{
-
-	public ArrivalEvent(State state, double executeTime) {
+	NewCustomer customer;
+	
+	public ArrivalEvent(State state, double executeTime, NewCustomer customer) {
 		super(state, executeTime);
-		// TODO Auto-generated constructor stub
+		this.customer = customer;
 	}
 	
 	public void execute() {
-		super.execute(new PickEvent(state, executeTime, customer, eventQueue));
+		super.execute(new PickEvent(state, executeTime, customer));
 		state.update(this); //uppdaterar klockan
 		//Lägg till i Queue ett nytt ArrivalEvent
 		//Lägg till i Queue ett nytt pickEvent

@@ -1,7 +1,6 @@
 package Event;
 
 import General.Event;
-import General.EventQueue;
 import General.State;
 
 public class EndEvent extends Event{
