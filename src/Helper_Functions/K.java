@@ -1,6 +1,6 @@
 package Helper_Functions;
 
-public interface K {
+public class K {
 
 	// Ex 1: (som sim1)
   public static final int M = 5;

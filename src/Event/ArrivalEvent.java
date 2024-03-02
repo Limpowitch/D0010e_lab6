@@ -13,10 +13,13 @@ public class ArrivalEvent extends Event{
 	}
 	
 	public void execute() {
-		super.execute(new PickEvent(state, executeTime, customer));
-		state.update(this); //uppdaterar klockan
-		//Lägg till i Queue ett nytt ArrivalEvent
-		//Lägg till i Queue ett nytt pickEvent
+		while (true) {
+			super.
+			state.update(this); //uppdaterar klockan
+			super.addEvent(new PickEvent(state, executeTime, customer));
+			//Lägg till i Queue ett nytt ArrivalEvent
+			//Lägg till i Queue ett nytt pickEvent
+		}
 	}
 
 	

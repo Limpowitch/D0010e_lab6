@@ -23,12 +23,11 @@ public class StoreState extends State{
 	
 	//TODO:
 	//Skapa alla updates/getter för alla olika store-variabler
-	public StoreState(double lambda, long seed, int maxCapacity) {
+	public StoreState(double lambda, long seed) {
 		super();
 		this.seed = seed; 
 		this.lambda = lambda; 
 		this.isOpen = false;
-		this.maxCapacity = maxCapacity;
 		this.customersInStore = 0;
 		this.missedCustomers = 0;
 		this.customersHasCheckedOut = 0;

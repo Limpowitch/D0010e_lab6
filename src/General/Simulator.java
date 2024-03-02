@@ -26,13 +26,14 @@ public class Simulator {
 		//Plocka ut 0:e Event i Eventqueue, kör execute
 		//Ta bort 0:e Event i EventQueuex
 		view.printBeginStore();
-		
+		// för kontroll //
 		System.out.println("\n" + eventQueue.toString() + "\n");
 		while (eventQueue.size() > 0) {
 			eventName = eventQueue.get(0).getClass().getSimpleName();
             view.updateCurrentEvent(eventName);
             eventQueue.remove(0);
-            
+    		// för kontroll //
+    		System.out.println("\n" + eventQueue.toString() + "\n");
 		}
 		
 		/*while (state.isRunning) {

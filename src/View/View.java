@@ -3,6 +3,7 @@ package View;
 import State.CheckoutQueue;
 import State.StoreState;
 import General.EventQueue;
+import Helper_Functions.K;
 import java.util.Observable;
 
 public class View extends Observable {
@@ -34,8 +35,8 @@ public class View extends Observable {
 	public View (StoreState storeState) {
 		kassakö = storeState.getCheckoutQueue();
 		isOpen = storeState.getOpenStatus()? "Ö" : "S";
-		antalKassor = 0;
-		maxSomRyms = storeState.getMaxCapacity();
+		antalKassor = 2;
+		maxSomRyms = K.M;
 		kund = storeState.getCustomersInStore();
 		led = 0;
 		I = 0;

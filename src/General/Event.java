@@ -13,7 +13,7 @@ public class Event {
 		this.executeTime = executeTime;
 	}
 	
-	public void execute(Event event) {
+	public void addEvent(Event event) {
 			eventQueue.addToQueue(event);
 	}
 	
