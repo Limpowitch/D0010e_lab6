@@ -24,11 +24,13 @@ public class RunSim {
 		StoreState storeState1 = new StoreState(0.5, K.SEED);
 		View view1 = new View(storeState1);
 		EventQueue eventQueue1 = new EventQueue();
-		Simulator simulator = new Simulator(state1, new EventQueue(), view1, storeState1);
-		
-		simulator.initializeEventQueue(new StartEvent(state1, 0), 
-									   new EndEvent(state1, 999));
+		Simulator simulator = new Simulator(state1, eventQueue1);
+
+		view1.printBeginStore();
+		eventQueue1.addToQueue(new StartEvent(state1, 0));
+		eventQueue1.addToQueue(new EndEvent(state1, 999));
 		simulator.run();
+		view1.printCloseStore();
 		/////////////////
     }
 }

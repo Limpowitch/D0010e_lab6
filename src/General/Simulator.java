@@ -6,15 +6,11 @@ import View.View;
 public class Simulator {
 	protected State state;
 	protected EventQueue eventQueue;
-	protected View view;
-	protected StoreState storeState;
 	private String eventName;
 	
-	public Simulator(State state, EventQueue eventQueue, View view, StoreState storeState) {
+	public Simulator(State state, EventQueue eventQueue) {
 		this.eventQueue = eventQueue;
 		this.state = state;
-		this.view = view;
-		this.storeState = storeState;
 	}
 	
 	public void initializeEventQueue(Event startEvent, Event endEvent) {
@@ -25,7 +21,6 @@ public class Simulator {
 	public void run() {
 		//Plocka ut 0:e Event i Eventqueue, kör execute
 		//Ta bort 0:e Event i EventQueuex
-		view.printBeginStore();
 		// för kontroll //
 		System.out.println("\n" + eventQueue.toString() + "\n");
 		while (eventQueue.size() > 0) {
