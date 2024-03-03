@@ -1,5 +1,7 @@
 package General;
 
+import State.Customer;
+
 public class Event {
 	
 	protected State state;
@@ -11,11 +13,11 @@ public class Event {
 		this.executeTime = executeTime;
 	}
 	
-	public void execute() {
-		//Generell funktion för event instruktioner
+	public void addEvent(Event event) {
+			eventQueue.addToQueue(event);
 	}
 	
-	public double returnExecuteTime() {
+	public double getExecuteTime() {
 		//Returnerar eventets executeTime
 		return this.executeTime;
 	}

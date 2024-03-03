@@ -1,7 +1,6 @@
 package Event;
 
 import General.Event;
-import General.EventQueue;
 import General.State;
 import State.Customer;
 import State.StoreState;
@@ -40,10 +39,5 @@ public class ArrivalEvent extends Event{
 			
 		} 
 		state.update(this); //uppdaterar klockan
-
-		
 	}
-
-	
-	
 }
