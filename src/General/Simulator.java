@@ -11,6 +11,10 @@ public class Simulator {
 	
 	public void run() {
 		//while !state.isStopped
+		while(state.isRunning) {
+			eventQueue.get(0).execute();
+			eventQueue.remove(0);
+		}
 		//Plocka ut 0:e Event i Eventqueue, kör execute
 		//Ta bort 0:e Event i EventQueue
 	}

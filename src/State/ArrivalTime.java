@@ -19,6 +19,6 @@ public class ArrivalTime {
 	public double generateArrivalTime(double currentTime) {
 		return currentTime + generatedNumber.next();
 	}
-}
+}	
 
 

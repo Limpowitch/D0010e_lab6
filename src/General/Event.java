@@ -6,8 +6,7 @@ public class Event {
 	protected EventQueue eventQueue;
 	protected double executeTime;
 	
-	public Event(State state, double executeTime, EventQueue eventQueue) {
-		this.eventQueue = eventQueue;
+	public Event(State state, double executeTime) {
 		this.state = state;
 		this.executeTime = executeTime;
 	}
