@@ -1,6 +1,7 @@
 package Event;
 
 import General.Event;
+import General.EventQueue;
 import General.State;
 import State.Customer;
 import State.StoreState;

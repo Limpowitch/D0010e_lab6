@@ -13,7 +13,7 @@ public class State {
 		this.isRunning = false;
 	}
 	
-	public boolean isRunning() {
+	public boolean isStopped() {
 		return this.isRunning;
 	}
 	
@@ -24,7 +24,7 @@ public class State {
 	public void update(Event event) {
 		//Vi behöver en previousTime för att göra kö-tid calculations etc
 		this.previousTime = this.currentTime;
-		this.currentTime = event.getExecuteTime();
+		this.currentTime = event.returnExecuteTime();
 		//Vi vill ge en notify till observers att något har hänt
 		
 	}
