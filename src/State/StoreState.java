@@ -11,9 +11,10 @@ public class StoreState extends State{
     private int customersInStore;
     private int highestCustomerID;
     private int missedCustomers;
+    private int paidCustomers;
     private CheckoutQueue checkoutQueue;
+    private int totalCustomersBeenInQueue;
     private int maxCheckoutCapacity;
-    private int customersHasCheckedOut;
 	private long seed;
 	private double lambda;
 	private double pickLow;
@@ -23,14 +24,16 @@ public class StoreState extends State{
 	
 	//TODO:
 	//Skapa alla updates/getter för alla olika store-variabler
-	public StoreState(double lambda, long seed) {
+	public StoreState(double lambda, long seed, int maxCapacity) {
 		super();
 		this.seed = seed; 
 		this.lambda = lambda; 
 		this.isOpen = false;
+		this.maxCapacity = maxCapacity;
 		this.customersInStore = 0;
 		this.missedCustomers = 0;
-		this.customersHasCheckedOut = 0;
+		this.paidCustomers = 0;
+		this.totalCustomersBeenInQueue = 0;
 		highestCustomerID = -1;
         checkoutQueue = new CheckoutQueue();
         arrivalTime = new ArrivalTime(lambda, seed);
@@ -38,48 +41,32 @@ public class StoreState extends State{
         payTime = new PayTime(payLow, payHigh, seed);
 	}
 	
-	public long getSeed() {
-		return seed;
-	}
-	
-	public double getArrivalTime() {
+	public double returnArrivalTime() {
 		return arrivalTime.generateArrivalTime(returnCurrentTime());
 	}
 	
-	public double getPickTime() {
+	public double returnPickTime() {
 		return pickTime.generatePickTime(returnCurrentTime());
 	}
 	
-	public double getpayTime() {
+	public double returnPayTime() {
 		return payTime.generatePayTime(returnCurrentTime());
 	}
 	
-	public double getCurrentTime() {
-        return currentTime;
-    }
-	
-	public boolean getOpenStatus() {
+	public boolean returnOpenStatus() {
 		return this.isOpen;
 	}
 	
-	public int getCustomersInStore() {
+	public int returnCustomersInStore() {
 		return this.customersInStore;
 	}
 	
-	public int getMaxCapacity() {
+	public int returnMaxCapacity() {
 		return this.maxCapacity;
 	}
 	
 	public int getMaxCheckoutCapacity() {
 		return this.maxCheckoutCapacity;
-	}
-	
-	public int getCustomersHasCheckedOut() {
-		return this.customersHasCheckedOut;
-	}
-	
-	public int getMissedCustomers() {
-		return this.missedCustomers;
 	}
 	
 	public CheckoutQueue getCheckoutQueue() {
@@ -90,8 +77,16 @@ public class StoreState extends State{
 		this.missedCustomers++;
 	}
 	
+	public void updatePaidCustomers() {
+		this.paidCustomers++;
+	}
+	
+	public void updateBeenInQueue() {
+		this.totalCustomersBeenInQueue++;
+	}
+	
 	public Customer generatedCustomer() {
-		return null;//new Customer(this.highestCustomerID + 1);
+		return new Customer(this.highestCustomerID + 1);
 	}
 	
 	

@@ -2,18 +2,29 @@ package Event;
 
 import General.Event;
 import General.State;
-import State.NewCustomer;
+import State.Customer;
+import State.StoreState;
 
 public class PayEvent extends Event{
-	NewCustomer customer;
-	public PayEvent(State state, double executeTime, NewCustomer customer) {
+	protected Customer customer;
+
+
+	public PayEvent(State state, double executeTime, Customer customer) {
 		super(state, executeTime);
-		this.customer = customer;
+		// TODO Auto-generated constructor stub
 	}
 
 	public void execute() {
-		super.execute(new CloseEvent(state, executeTime, customer));
-		state.update(this);
 		//Uppdatera StoreState med relevant information
+		
+		((StoreState)state).updateStoreCount(false); // minskar antalet i affären med 1
+		((StoreState)state).updatePaidCustomers(); // ökar antalet kunder som har betalat med 1
+		
+		if (((StoreState)state).getCheckoutQueue().getSize() > 0) {
+			eventQueue.addToQueue(new PayEvent((StoreState)state, ((StoreState)state).returnPayTime(), ((StoreState)state).getCheckoutQueue().getFirstCustomer()));
+		}
+		state.update(this);
+
+
 	}
 }

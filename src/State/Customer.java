@@ -1,11 +1,17 @@
 package State;
 
 public class Customer {
-	private static int customerID = 1;
-	public int getCostumerID () {
+	
+	//En customer är bara ett customerID
+	public int customerID;
+	
+	public Customer(int customerID) {
+		this.customerID = customerID;
+	}
+	
+	public int customerNumber() {
 		return customerID;
 	}
-	public void updateCostumerID () {
-        customerID++;
-    }
 }
+
+

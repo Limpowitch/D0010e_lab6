@@ -26,6 +26,7 @@ public class State {
 		this.previousTime = this.currentTime;
 		this.currentTime = event.getExecuteTime();
 		//Vi vill ge en notify till observers att något har hänt
+		
 	}
 	
 	

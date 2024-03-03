@@ -13,6 +13,8 @@ public class EndEvent extends Event{
 	public void execute() {
 		state.update(this);
 		//Uppdatera StoreState med relevant information
+		state.stopSim();
+		state.update(this);
 	}
 
 }

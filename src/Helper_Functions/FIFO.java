@@ -8,7 +8,7 @@ public class FIFO {
 	private int maxSize = 0;
 	
 	public FIFO() {
-		FIFO = new ArrayList<>();
+		this.FIFO = new ArrayList<>();
 	}
 	
 	public void add(Object item) {
@@ -30,5 +30,9 @@ public class FIFO {
 	
 	public int maxSize() {
 		return maxSize;
+	}
+	
+	public Object getFirst() {
+		return FIFO.get(0);
 	}
 }

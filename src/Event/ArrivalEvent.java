@@ -2,26 +2,42 @@ package Event;
 
 import General.Event;
 import General.State;
-import State.NewCustomer;
+import State.Customer;
+import State.StoreState;
 
 public class ArrivalEvent extends Event{
-	NewCustomer customer;
 	
-	public ArrivalEvent(State state, double executeTime, NewCustomer customer) {
+
+	public ArrivalEvent(State state, double executeTime) {
 		super(state, executeTime);
-		this.customer = customer;
+		// TODO Auto-generated constructor stub
 	}
 	
 	public void execute() {
-		while (true) {
-			super.
-			state.update(this); //uppdaterar klockan
-			super.addEvent(new PickEvent(state, executeTime, customer));
-			//Lägg till i Queue ett nytt ArrivalEvent
+		
+		//Skapa customer
+		Customer customer = ((StoreState)state).generatedCustomer();
+		
+		//Kolla om affär är öppen och att det inte är fullt
+		if (((StoreState)state).returnOpenStatus() 
+			&& ((StoreState)state).returnCustomersInStore() < ((StoreState)state).returnMaxCapacity() ) {
+			
+			((StoreState)state).updateStoreCount(true); // ökar antalet i affären med 1
+			
+			//Lägg till i Queue ett nytt arrivalEvent
+			eventQueue.addToQueue(new ArrivalEvent((StoreState)state, ((StoreState)state).returnArrivalTime()));
 			//Lägg till i Queue ett nytt pickEvent
-		}
+			eventQueue.addToQueue(new PickEvent((StoreState)state, ((StoreState)state).returnPickTime(), customer));
+			
+		} else if (((StoreState)state).returnOpenStatus() 
+			&& ((StoreState)state).returnCustomersInStore() == ((StoreState)state).returnMaxCapacity()) {
+			
+			((StoreState)state).updateMissedCustomers(); // Ökar missade antalet kunder med 1
+			
+			//Lägg till i Queue ett nytt arrivalEvent
+			eventQueue.addToQueue(new ArrivalEvent((StoreState)state, ((StoreState)state).returnArrivalTime()));
+			
+		} 
+		state.update(this); //uppdaterar klockan
 	}
-
-	
-	
 }
