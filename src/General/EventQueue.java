@@ -7,6 +7,13 @@ public class EventQueue extends ArrayList<Event> {
         super();
     }
 
+<<<<<<< HEAD
+=======
+    public EventQueue() {
+        super();
+    }
+
+>>>>>>> 15e65bb (boom bam fixat majoriteten)
     // Lägger till event i queue
     public void addToQueue(Event event) {
 

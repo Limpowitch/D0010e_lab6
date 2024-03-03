@@ -11,7 +11,10 @@ public class EndEvent extends Event{
 	}
 	
 	public void execute() {
+<<<<<<< HEAD
 		state.update(this);
+=======
+>>>>>>> 15e65bb (boom bam fixat majoriteten)
 		//Uppdatera StoreState med relevant information
 		state.stopSim();
 		state.update(this);

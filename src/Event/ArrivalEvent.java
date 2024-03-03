@@ -39,5 +39,10 @@ public class ArrivalEvent extends Event{
 			
 		} 
 		state.update(this); //uppdaterar klockan
+<<<<<<< HEAD
+=======
+
+		
+>>>>>>> 15e65bb (boom bam fixat majoriteten)
 	}
 }
