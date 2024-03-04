@@ -7,9 +7,6 @@ import Helper_Functions.K;
 import java.util.Observable;
 
 public class View extends Observable {
-	// En idé är att Simulator observerar storestate (eller whatever)
-	// och när den "upptäcker ändring" anropar den denna metod i vy.
-	// Vi tar det på måndag eller över dc.
 	private EventQueue eventQueue;
 	// För printBeginStore()
 	private int antalKassor;
@@ -24,7 +21,7 @@ public class View extends Observable {
 	private int kund;
 	private String isOpen;
 	private int led;
-	private double ledTid;
+	private double ledT;
 	private int I;
 	private int dollar;
 	private int sadSmiley;
@@ -32,6 +29,12 @@ public class View extends Observable {
 	private double köT;
 	private int köar;
 	private CheckoutQueue kassakö;
+	// För printEndStore()
+	private int totaltAntalKunder;
+	private int kunderSomKomIn;
+	private int missadeKunder;
+	// antalKassor
+	
 	
 	public View (StoreState storeState) {
 		kassakö = storeState.getCheckoutQueue();
@@ -47,8 +50,7 @@ public class View extends Observable {
 		plocktid = 0;
 		betaltid = 0;
 		köT = 0;
-		ledTid = 0;
-		// tid = currentTime(); Vart finns currentTime?
+		ledT = 0;
 		ankomsttid = storeState.getArrivalTime();
 		frö = 13;// ? storeState.getSeed();
 	}
@@ -74,19 +76,19 @@ public class View extends Observable {
 	}
 	public void printStoreStats() {
 		String updatingMessage =
-				"0,00 "
+				  tid + " "
 				+ currentEventName + " " 
-				+ "0 "
+				+ kund + " " 
 				+ isOpen + " " 
-				+ "2 "
-				+ "0.87 "
-				+ "0 "
-				+ "0 "
-				+ "0 "
-				+ "0 "
-				+ "0,00 "
-				+ "0 "
-				+ "[]\n\n";
+				+ led + " " 
+				+ ledT + " " 
+				+ I + " " 
+				+ dollar + " " 
+				+ sadSmiley + " " 
+				+ köat + " " 
+				+ köT + " " 
+				+ köar + " " 
+				+ kassakö + "\n\n";
 		System.out.print(updatingMessage);
     }
 	public void printCloseStore() {
