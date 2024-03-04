@@ -3,11 +3,11 @@ package View;
 import State.CheckoutQueue;
 import State.StoreState;
 import General.EventQueue;
+import General.State;
 import Helper_Functions.K;
-import java.util.Observable;
 
-public class View extends Observable {
-	private EventQueue eventQueue;
+public class View implements Observer {
+	private StoreState storeState;
 	// För printBeginStore()
 	private int antalKassor;
 	private int maxSomRyms;
@@ -37,22 +37,15 @@ public class View extends Observable {
 	
 	
 	public View (StoreState storeState) {
-		kassakö = storeState.getCheckoutQueue();
-		isOpen = storeState.getOpenStatus() ? "Ö" : "S";
-		antalKassor = 2;
-		maxSomRyms = K.M;
-		kund = storeState.getCustomersInStore();
-		led = 0;
-		I = 0;
-		dollar = 0;
-		sadSmiley = 0;
-		köat = storeState.getCustomersHasCheckedOut();
-		plocktid = 0;
-		betaltid = 0;
-		köT = 0;
-		ledT = 0;
-		ankomsttid = storeState.getArrivalTime();
-		frö = 13;// ? storeState.getSeed();
+		this.storeState = storeState;
+		/*
+		antalKassor = ;
+		maxSomRyms = ;
+		ankomsttid = ;
+		plocktid = ;
+		betaltid = ;
+		frö = ;
+		*/
 	}
 
 	public void updateCurrentEvent(String eventName) {
@@ -75,6 +68,7 @@ public class View extends Observable {
 		System.out.print(openingMessage);
 	}
 	public void printStoreStats() {
+		storeState.notifyObservers();
 		String updatingMessage =
 				  tid + " "
 				+ currentEventName + " " 
@@ -103,5 +97,25 @@ public class View extends Observable {
         		+ "Genomsnittlig kötid: 2,72 te.\n";
         System.out.print(closingMessage);
     }
+
+	public void update(StoreState storeState) {
+		kassakö = storeState.getCheckoutQueue();
+		isOpen = storeState.getOpenStatus() ? "Ö" : "S";
+		antalKassor = 2;
+		maxSomRyms = K.M;
+		kund = storeState.getCustomersInStore();
+		led = 0;
+		I = 0;
+		dollar = 0;
+		sadSmiley = 0;
+		köat = storeState.getCustomersHasCheckedOut();
+		plocktid = 0;
+		betaltid = 0;
+		köT = 0;
+		ledT = 0;
+		ankomsttid = storeState.getArrivalTime();
+		frö = 13;// ? storeState.getSeed();
+		
+	}
 	
 }

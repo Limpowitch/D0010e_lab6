@@ -1,8 +1,13 @@
 package State;
 
 import General.State;
+import State.PickTime;
+import View.Observer;
+import View.Subject;
+import State.PayTime;
 
-public class StoreState extends State{
+public class StoreState extends State implements Subject{
+	private Observer observer;
     final ArrivalTime arrivalTime;
     final PickTime pickTime;
     final PayTime payTime;
@@ -105,5 +110,23 @@ public class StoreState extends State{
 		} else {
 			this.customersInStore--;
 		}
+	}
+
+	@Override
+	public void registerObserver(Observer o) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void removeObserver(Observer o) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void notifyObservers() {
+		observer.update(this);
+		
 	}
 }
