@@ -1,2 +1,9 @@
+# Fil som Mac skapar för Finder
 **/.DS_Store
-bin/
+
+# Filer vi ej behöver dela
+**.project
+**.classpath
+
+# Vi behöver endast dela source-koden, dvs .java-filer
+/bin

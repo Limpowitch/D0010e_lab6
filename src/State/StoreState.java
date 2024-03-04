@@ -14,6 +14,7 @@ public class StoreState extends State{
     private int paidCustomers;
     private CheckoutQueue checkoutQueue;
     private int totalCustomersBeenInQueue;
+    private int customersHasCheckedOut;
     private int maxCheckoutCapacity;
 	private long seed;
 	private double lambda;
@@ -41,28 +42,32 @@ public class StoreState extends State{
         payTime = new PayTime(payLow, payHigh, seed);
 	}
 	
-	public double returnArrivalTime() {
+	public double getArrivalTime() {
 		return arrivalTime.generateArrivalTime(returnCurrentTime());
 	}
 	
-	public double returnPickTime() {
+	public double getPickTime() {
 		return pickTime.generatePickTime(returnCurrentTime());
 	}
 	
-	public double returnPayTime() {
+	public double getPayTime() {
 		return payTime.generatePayTime(returnCurrentTime());
 	}
 	
-	public boolean returnOpenStatus() {
+	public boolean getOpenStatus() {
 		return this.isOpen;
 	}
 	
-	public int returnCustomersInStore() {
+	public int getCustomersInStore() {
 		return this.customersInStore;
 	}
 	
-	public int returnMaxCapacity() {
+	public int getMaxCapacity() {
 		return this.maxCapacity;
+	}
+	
+	public int getCustomersHasCheckedOut() {
+		return customersHasCheckedOut;
 	}
 	
 	public int getMaxCheckoutCapacity() {

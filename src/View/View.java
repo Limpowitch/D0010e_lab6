@@ -11,30 +11,31 @@ public class View extends Observable {
 	// och när den "upptäcker ändring" anropar den denna metod i vy.
 	// Vi tar det på måndag eller över dc.
 	private EventQueue eventQueue;
-	private CheckoutQueue kassakö;
-	private String händelse;
-	private String isOpen;
-	private String currentEventName;
+	// För printBeginStore()
 	private int antalKassor;
 	private int maxSomRyms;
+	private double ankomsttid;
+	private double plocktid;
+	private double betaltid;
+	private long frö;
+	// För printStoreStats()
+	private int tid;
+	private String currentEventName;
 	private int kund;
+	private String isOpen;
 	private int led;
+	private double ledTid;
 	private int I;
 	private int dollar;
 	private int sadSmiley;
 	private int köat;
-	private int köra;
-	private double plocktid;
-	private double betaltid;
 	private double köT;
-	private double ledTid;
-	private double tid;
-	private double ankomsttid;
-	private long frö;
+	private int köar;
+	private CheckoutQueue kassakö;
 	
 	public View (StoreState storeState) {
 		kassakö = storeState.getCheckoutQueue();
-		isOpen = storeState.getOpenStatus()? "Ö" : "S";
+		isOpen = storeState.getOpenStatus() ? "Ö" : "S";
 		antalKassor = 2;
 		maxSomRyms = K.M;
 		kund = storeState.getCustomersInStore();
@@ -43,14 +44,13 @@ public class View extends Observable {
 		dollar = 0;
 		sadSmiley = 0;
 		köat = storeState.getCustomersHasCheckedOut();
-		köra = 0;
 		plocktid = 0;
 		betaltid = 0;
 		köT = 0;
 		ledTid = 0;
 		// tid = currentTime(); Vart finns currentTime?
 		ankomsttid = storeState.getArrivalTime();
-		frö = storeState.getSeed();
+		frö = 13;// ? storeState.getSeed();
 	}
 
 	public void updateCurrentEvent(String eventName) {
@@ -72,7 +72,7 @@ public class View extends Observable {
 				+ "Tid Händelse Kund ? led ledT I $ :-( köat köT köar [Kassakö..]\n";
 		System.out.print(openingMessage);
 	}
-	public void printStoreState() {
+	public void printStoreStats() {
 		String updatingMessage =
 				"0,00 "
 				+ currentEventName + " " 
