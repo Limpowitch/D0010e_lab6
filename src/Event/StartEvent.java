@@ -14,10 +14,12 @@ public class StartEvent extends Event {
 	
 	public void execute() {
 		
+		
+		
 		((StoreState)state).setOpenStatus(true);//Öppna affären i StoreState
 		
 		//Lägg till ArrivalEvent i Queue
-		eventQueue.addToQueue(new ArrivalEvent((StoreState)state, ((StoreState)state).returnArrivalTime()));
+		eventQueue.addToQueue(new ArrivalEvent((StoreState)state, ((StoreState)state).getArrivalTime()));
 		//ArrivalEvent behöver state, arrivalTime
 		state.update(this); // Vi uppdaterar state klockan med executeTime
 	}

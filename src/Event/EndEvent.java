@@ -15,6 +15,8 @@ public class EndEvent extends Event{
 		//Uppdatera StoreState med relevant information
 		state.stopSim();
 		state.update(this);
+		
+		
 	}
 
 }

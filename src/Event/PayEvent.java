@@ -22,7 +22,7 @@ public class PayEvent extends Event{
 		((StoreState)state).updatePaidCustomers(); // ökar antalet kunder som har betalat med 1
 		
 		if (((StoreState)state).getCheckoutQueue().getSize() > 0) {
-			eventQueue.addToQueue(new PayEvent((StoreState)state, ((StoreState)state).returnPayTime(), ((StoreState)state).getCheckoutQueue().getFirstCustomer()));
+			eventQueue.addToQueue(new PayEvent((StoreState)state, ((StoreState)state).getPayTime(), ((StoreState)state).getCheckoutQueue().getFirstCustomer()));
 		}
 		state.update(this);
 

@@ -1,8 +1,15 @@
 package State;
 
 import General.State;
+<<<<<<< Updated upstream
 
 public class StoreState extends State{
+=======
+import State.PickTime;
+import State.PayTime;
+
+public class StoreState extends State {
+>>>>>>> Stashed changes
     final ArrivalTime arrivalTime;
     final PickTime pickTime;
     final PayTime payTime;
@@ -53,11 +60,43 @@ public class StoreState extends State{
 		return payTime.generatePayTime(returnCurrentTime());
 	}
 	
+<<<<<<< Updated upstream
 	public boolean returnOpenStatus() {
 		return this.isOpen;
 	}
 	
 	public int returnCustomersInStore() {
+=======
+	public double getLambda() {
+		return this.lambda;
+	}
+	
+	public double getPickLow() {
+		return this.pickLow;
+	}
+	
+	public double getPickHigh() {
+		return this.pickHigh;
+	}
+	
+	public double getPayLow() {
+		return this.payLow;
+	}
+	
+	public double getPayHigh() {
+		return this.payHigh;
+	}
+	
+	public boolean getOpenStatus() {
+		return this.isOpen;
+	}
+	
+	public long getSeed() {
+		return this.seed;
+	}
+	
+	public int getCustomersInStore() {
+>>>>>>> Stashed changes
 		return this.customersInStore;
 	}
 	

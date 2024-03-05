@@ -20,7 +20,7 @@ public class PickEvent extends Event{
 		if (((StoreState)state).getCheckoutQueue().getSize() != ((StoreState)state).getMaxCheckoutCapacity()) {
 			//TODO: Lägg till relevanta storestate updates
 			//Lägg till nytt payEvent
-			eventQueue.addToQueue(new PayEvent((StoreState)state, ((StoreState)state).returnPayTime(), ((StoreState)state).getCheckoutQueue().getFirstCustomer()));
+			eventQueue.addToQueue(new PayEvent((StoreState)state, ((StoreState)state).getPayTime(), ((StoreState)state).getCheckoutQueue().getFirstCustomer()));
 			
 		//Om antalet kunder är detsamma som max capacity
 		} else {
