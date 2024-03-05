@@ -1,14 +1,17 @@
 package Main;
 
+import General.EventQueue;
+import General.Simulator;
+import General.State;
+import State.StoreState;
+import View.View;
+import Helper_Functions.K;
+
 public class RunSim {
-<<<<<<< Updated upstream
-=======
-	/*private Simulator simulator;
-	
-	public RunSim(Simulator simulator) {
-		this.simulator = simulator;
-	}*/
 	public static void main(String[] args) {
+	}
+	
+	private void startNew() {
 		// Simulator 1 //
 		State state1 = new State();
 		// StoreState(lambda, seed, maxCapacity, arrivalTime, pickTime, payTime, customersInStore, highest)
@@ -16,6 +19,5 @@ public class RunSim {
 		View view1 = new View(storeState1);
 		EventQueue eventQueue1 = new EventQueue();
 		Simulator simulator = new Simulator(state1, eventQueue1);
->>>>>>> Stashed changes
-
+	}
 }
