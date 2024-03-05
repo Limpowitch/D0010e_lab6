@@ -29,6 +29,7 @@ public class PickEvent extends Event{
 			((StoreState)state).updateBeenInQueue(); //ökar antalet som har varit i kön med 1
 			((StoreState)state).getCheckoutQueue().addCustomer(customer); // lägger in en kund i kö
 		}
+		((StoreState)state).updateLatestEventCustomer(customer);
 		((StoreState)state).updateLatestEvent("Pick");
 		state.update(this);
 

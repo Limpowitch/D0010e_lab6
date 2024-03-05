@@ -18,6 +18,7 @@ public class ArrivalEvent extends Event{
 		
 		//Skapa customer
 		Customer customer = ((StoreState)state).generatedCustomer();
+		((StoreState)state).updateTotalCustomers();
 		
 		//Kolla om affär är öppen och att det inte är fullt
 		if (((StoreState)state).getOpenStatus() 
@@ -38,7 +39,8 @@ public class ArrivalEvent extends Event{
 			//Lägg till i Queue ett nytt arrivalEvent
 			eventQueue.addToQueue(new ArrivalEvent((StoreState)state, ((StoreState)state).getArrivalTime()));
 			
-		} 
+		}
+		((StoreState)state).updateLatestEventCustomer(customer);
 		((StoreState)state).updateLatestEvent("Arrival");
 		state.update(this); //uppdaterar klockan
 

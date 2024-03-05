@@ -15,8 +15,9 @@ public class EndEvent extends Event{
 	public void execute() {
 		//Uppdatera StoreState med relevant information
 		state.stopSim();
-		((StoreState)state).updateLatestEvent("End");
-		state.update(this);
+		
+		view.printCloseStore();
+
 		
 		
 	}

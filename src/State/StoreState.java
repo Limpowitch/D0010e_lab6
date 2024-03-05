@@ -21,6 +21,7 @@ public class StoreState extends State {
     private String latestEventName;
     private int currentCheckoutCapacity;
     private int latestEventCustomer;
+    private int totalCustomers;
 	private long seed;
 	private double lambda;
 	private double pickLow;
@@ -85,6 +86,9 @@ public class StoreState extends State {
 	}
 	
 	public int getLatestEventCustomer() {
+		if(this.getLatestEvent() == "close") {
+			return (Integer) null;
+		}
 		return this.latestEventCustomer;
 	}
 	
@@ -128,6 +132,10 @@ public class StoreState extends State {
 		return this.latestEventName;
 	}
 	
+	public int getTotalCustomers() {
+		return this.totalCustomers;
+	}
+	
 	public void updateMissedCustomers() {
 		this.missedCustomers++;
 	}
@@ -155,6 +163,10 @@ public class StoreState extends State {
 	
 	public void updateLatestEventCustomer(Customer customer) {
 		latestEventCustomer = customer.customerID;
+	}
+	
+	public void updateTotalCustomers() {
+		this.totalCustomers++;
 	}
 	
 	public void updateStoreCount(boolean increase) {

@@ -48,28 +48,27 @@ public class View extends GeneralView {
 	            + storeState.getLatestEventCustomer() + " "
 	            + storeState.getOpenStatus() + " "
 	            + storeState.getCurrentCheckoutCapacity() + " "
-	            + storeState.getPopulatedQueuePime() + " " // Assuming there's a method named getLedigTid in StoreState
+	            + storeState.getEmptyQueueTime() + " " // Assuming there's a method named getLedigTid in StoreState
 	            + storeState.getCustomersInStore() + " "
 	            + storeState.getCustomersHasCheckedOut() + " "
 	            + storeState.getMissedCustomers() + " "
 	            + storeState.getTotalCustomersBeenInQueue() + " "
-	            + storeState.getEmptyQueueTime() + " " // Assuming there's a method named getKötid in StoreState
+	            + storeState.getPopulatedQueueTime() + " " // Assuming there's a method named getKötid in StoreState
 	            + storeState.getCheckoutQueue().getSize() + " "
 	            + storeState.getCheckoutQueue().getCurrentQueue() + "\n\n"; // Assuming there's a method named getKasseStringFormat in StoreState
 	    System.out.print(updatingMessage);
 	}
 	
 	public void printCloseStore() {
-        String closingMessage = 
-        		"RESULTAT\n"
-        		+ "========\n"
-        		+ "1) Av 10 kunder handlade 8 medan 2 missades.\n"
-        		+ "2) Total tid 2 kassor varit lediga: 6,11 te.\n"
-        		+ "Genomsnittlig ledig kassatid: 3,06 te (dvs 23,03% av tiden från öppning tills sista kunden\n"
-        		+ "betalat).\n"
-        		+ "3) Total tid 5 kunder tvingats köa: 13,60 te.\n"
-        		+ "Genomsnittlig kötid: 2,72 te.\n";
-        System.out.print(closingMessage);
-    }
+	    String closingMessage =
+	            "RESULTAT\n"
+	            + "========\n"
+	            + "1) Av " + storeState.getTotalCustomers() + " kunder handlade " + storeState.getCustomersHasCheckedOut() + " medan " + storeState.getMissedCustomers() + " missades.\n"
+	            + "2) Total tid " + storeState.getCurrentCheckoutCapacity() + " kassor varit lediga: " + storeState.getEmptyQueueTime() + " te.\n"
+	            + "Genomsnittlig ledig kassatid: " + storeState.returnCurrentTime()/storeState.getTotalCustomersBeenInQueue() + " te"
+	            + "3) Total tid " + storeState.getTotalCustomersBeenInQueue() + " kunder tvingats köa: " + storeState.getPopulatedQueueTime() + " te.\n"
+	            + "Genomsnittlig kötid: " + storeState.getPopulatedQueueTime()/storeState.getTotalCustomersBeenInQueue()+ " te.\n";
+	    System.out.print(closingMessage);
+	}
 	
 }
