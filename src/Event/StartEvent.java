@@ -21,6 +21,8 @@ public class StartEvent extends Event {
 		//Lägg till ArrivalEvent i Queue
 		eventQueue.addToQueue(new ArrivalEvent((StoreState)state, ((StoreState)state).getArrivalTime()));
 		//ArrivalEvent behöver state, arrivalTime
+		
+		((StoreState)state).updateLatestEvent("Start");
 		state.update(this); // Vi uppdaterar state klockan med executeTime
 	}
 

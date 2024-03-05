@@ -1,11 +1,5 @@
 package View;
 
-<<<<<<< Updated upstream
-public class View {
-	
-	//Ska ha metoderna:
-	//writeBeginning, writeState, writeResult
-=======
 import State.CheckoutQueue;
 import State.StoreState;
 import General.GeneralView;
@@ -48,22 +42,23 @@ public class View extends GeneralView {
 		System.out.print(openingMessage);
 	}
 	public void printStoreStats() {
-		String updatingMessage =
-				  tid + " "
-				+ currentEventName + " " 
-				+ kund + " " 
-				+ isOpen + " " 
-				+ led + " " 
-				+ ledT + " " 
-				+ I + " " 
-				+ dollar + " " 
-				+ sadSmiley + " " 
-				+ köat + " " 
-				+ köT + " " 
-				+ köar + " " 
-				+ kassakö + "\n\n";
-		System.out.print(updatingMessage);
-    }
+	    String updatingMessage =
+	            storeState.returnCurrentTime() + " "
+	            + storeState.getLatestEvent() + " "
+	            + storeState.getLatestEventCustomer() + " "
+	            + storeState.getOpenStatus() + " "
+	            + storeState.getCurrentCheckoutCapacity() + " "
+	            + storeState.getPopulatedQueuePime() + " " // Assuming there's a method named getLedigTid in StoreState
+	            + storeState.getCustomersInStore() + " "
+	            + storeState.getCustomersHasCheckedOut() + " "
+	            + storeState.getMissedCustomers() + " "
+	            + storeState.getTotalCustomersBeenInQueue() + " "
+	            + storeState.getEmptyQueueTime() + " " // Assuming there's a method named getKötid in StoreState
+	            + storeState.getCheckoutQueue().getSize() + " "
+	            + storeState.getCheckoutQueue().getCurrentQueue() + "\n\n"; // Assuming there's a method named getKasseStringFormat in StoreState
+	    System.out.print(updatingMessage);
+	}
+	
 	public void printCloseStore() {
         String closingMessage = 
         		"RESULTAT\n"
@@ -76,6 +71,5 @@ public class View extends GeneralView {
         		+ "Genomsnittlig kötid: 2,72 te.\n";
         System.out.print(closingMessage);
     }
->>>>>>> Stashed changes
 	
 }

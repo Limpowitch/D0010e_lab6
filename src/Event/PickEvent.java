@@ -17,6 +17,7 @@ public class PickEvent extends Event{
 	public void execute() {
 		
 		//Om antalet kunder i kön inte är max capacity
+		//TODO: unfucka den här 
 		if (((StoreState)state).getCheckoutQueue().getSize() != ((StoreState)state).getMaxCheckoutCapacity()) {
 			//TODO: Lägg till relevanta storestate updates
 			//Lägg till nytt payEvent
@@ -28,6 +29,7 @@ public class PickEvent extends Event{
 			((StoreState)state).updateBeenInQueue(); //ökar antalet som har varit i kön med 1
 			((StoreState)state).getCheckoutQueue().addCustomer(customer); // lägger in en kund i kö
 		}
+		((StoreState)state).updateLatestEvent("Pick");
 		state.update(this);
 
 	}

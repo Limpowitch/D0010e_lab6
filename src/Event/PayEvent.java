@@ -24,6 +24,7 @@ public class PayEvent extends Event{
 		if (((StoreState)state).getCheckoutQueue().getSize() > 0) {
 			eventQueue.addToQueue(new PayEvent((StoreState)state, ((StoreState)state).getPayTime(), ((StoreState)state).getCheckoutQueue().getFirstCustomer()));
 		}
+		((StoreState)state).updateLatestEvent("Pay");
 		state.update(this);
 
 

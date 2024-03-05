@@ -1,15 +1,10 @@
 package State;
 
 import General.State;
-<<<<<<< Updated upstream
-
-public class StoreState extends State{
-=======
 import State.PickTime;
 import State.PayTime;
 
 public class StoreState extends State {
->>>>>>> Stashed changes
     final ArrivalTime arrivalTime;
     final PickTime pickTime;
     final PayTime payTime;
@@ -21,7 +16,11 @@ public class StoreState extends State {
     private int paidCustomers;
     private CheckoutQueue checkoutQueue;
     private int totalCustomersBeenInQueue;
+    private int customersHasCheckedOut;
     private int maxCheckoutCapacity;
+    private String latestEventName;
+    private int currentCheckoutCapacity;
+    private int latestEventCustomer;
 	private long seed;
 	private double lambda;
 	private double pickLow;
@@ -40,6 +39,7 @@ public class StoreState extends State {
 		this.customersInStore = 0;
 		this.missedCustomers = 0;
 		this.paidCustomers = 0;
+		this.currentCheckoutCapacity = maxCheckoutCapacity;
 		this.totalCustomersBeenInQueue = 0;
 		highestCustomerID = -1;
         checkoutQueue = new CheckoutQueue();
@@ -48,25 +48,18 @@ public class StoreState extends State {
         payTime = new PayTime(payLow, payHigh, seed);
 	}
 	
-	public double returnArrivalTime() {
+	public double getArrivalTime() {
 		return arrivalTime.generateArrivalTime(returnCurrentTime());
 	}
 	
-	public double returnPickTime() {
+	public double getPickTime() {
 		return pickTime.generatePickTime(returnCurrentTime());
 	}
 	
-	public double returnPayTime() {
+	public double getPayTime() {
 		return payTime.generatePayTime(returnCurrentTime());
 	}
 	
-<<<<<<< Updated upstream
-	public boolean returnOpenStatus() {
-		return this.isOpen;
-	}
-	
-	public int returnCustomersInStore() {
-=======
 	public double getLambda() {
 		return this.lambda;
 	}
@@ -87,8 +80,24 @@ public class StoreState extends State {
 		return this.payHigh;
 	}
 	
+	public int getMissedCustomers() {
+		return this.missedCustomers;
+	}
+	
+	public int getLatestEventCustomer() {
+		return this.latestEventCustomer;
+	}
+	
+	public int getCurrentCheckoutCapacity() {
+		return this.currentCheckoutCapacity;
+	}
+	
 	public boolean getOpenStatus() {
 		return this.isOpen;
+	}
+	
+	public int getTotalCustomersBeenInQueue() {
+		return this.totalCustomersBeenInQueue;
 	}
 	
 	public long getSeed() {
@@ -96,12 +105,15 @@ public class StoreState extends State {
 	}
 	
 	public int getCustomersInStore() {
->>>>>>> Stashed changes
 		return this.customersInStore;
 	}
 	
-	public int returnMaxCapacity() {
+	public int getMaxCapacity() {
 		return this.maxCapacity;
+	}
+	
+	public int getCustomersHasCheckedOut() {
+		return customersHasCheckedOut;
 	}
 	
 	public int getMaxCheckoutCapacity() {
@@ -110,6 +122,10 @@ public class StoreState extends State {
 	
 	public CheckoutQueue getCheckoutQueue() {
 		return this.checkoutQueue;
+	}
+	
+	public String getLatestEvent() {
+		return this.latestEventName;
 	}
 	
 	public void updateMissedCustomers() {
@@ -131,6 +147,14 @@ public class StoreState extends State {
 	
 	public void setOpenStatus(boolean openStatus) {
 			this.isOpen = openStatus;
+	}
+	
+	public void updateLatestEvent(String string) {
+		this.latestEventName = string;
+	}
+	
+	public void updateLatestEventCustomer(Customer customer) {
+		latestEventCustomer = customer.customerID;
 	}
 	
 	public void updateStoreCount(boolean increase) {

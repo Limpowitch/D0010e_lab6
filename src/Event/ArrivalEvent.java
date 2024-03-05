@@ -39,6 +39,7 @@ public class ArrivalEvent extends Event{
 			eventQueue.addToQueue(new ArrivalEvent((StoreState)state, ((StoreState)state).getArrivalTime()));
 			
 		} 
+		((StoreState)state).updateLatestEvent("Arrival");
 		state.update(this); //uppdaterar klockan
 
 		
