@@ -10,8 +10,8 @@ public class PayEvent extends Event{
 	protected Customer customer;
 
 
-	public PayEvent(State state, double executeTime, Customer customer) {
-		super(state, executeTime);
+	public PayEvent(State state, double executeTime, EventQueue eventQueue, Customer customer) {
+		super(state, eventQueue, executeTime);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -22,7 +22,7 @@ public class PayEvent extends Event{
 		((StoreState)state).updatePaidCustomers(); // ökar antalet kunder som har betalat med 1
 		
 		if (((StoreState)state).getCheckoutQueue().getSize() > 0) {
-			eventQueue.addToQueue(new PayEvent((StoreState)state, ((StoreState)state).getPayTime(), ((StoreState)state).getCheckoutQueue().getFirstCustomer()));
+			eventQueue.addToQueue(new PayEvent((StoreState)state, ((StoreState)state).getPayTime(), eventQueue, ((StoreState)state).getCheckoutQueue().getFirstCustomer()));
 		}
 		((StoreState)state).updateLatestEventCustomer(customer);
 		((StoreState)state).updateLatestEvent("Pay");

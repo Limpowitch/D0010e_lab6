@@ -9,6 +9,7 @@ public class State extends Observable{
 
 	public State() {
 		this.isRunning = true;
+		this.currentTime = 0;
 	}
 	
 	public void stopSim() {

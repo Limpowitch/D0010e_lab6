@@ -8,8 +8,8 @@ import State.StoreState;
 
 public class CloseEvent extends Event{
 
-	public CloseEvent(State state, double executeTime) {
-		super(state, executeTime);
+	public CloseEvent(State state, EventQueue eventQueue, double executeTime) {
+		super(state, eventQueue, executeTime);
 		// TODO Auto-generated constructor stub
 	}
 	

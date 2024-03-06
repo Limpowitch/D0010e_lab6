@@ -9,8 +9,8 @@ import State.StoreState;
 public class ArrivalEvent extends Event{
 	
 
-	public ArrivalEvent(State state, double executeTime) {
-		super(state, executeTime);
+	public ArrivalEvent(State state, EventQueue eventQueue, double executeTime) {
+		super(state, eventQueue, executeTime);
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -27,9 +27,9 @@ public class ArrivalEvent extends Event{
 			((StoreState)state).updateStoreCount(true); // ökar antalet i affären med 1
 			
 			//Lägg till i Queue ett nytt arrivalEvent
-			eventQueue.addToQueue(new ArrivalEvent((StoreState)state, ((StoreState)state).getArrivalTime()));
+			eventQueue.addToQueue(new ArrivalEvent((StoreState)state, eventQueue, ((StoreState)state).getArrivalTime()));
 			//Lägg till i Queue ett nytt pickEvent
-			eventQueue.addToQueue(new PickEvent((StoreState)state, ((StoreState)state).getPickTime(), customer));
+			eventQueue.addToQueue(new PickEvent((StoreState)state, ((StoreState)state).getPickTime(), eventQueue, customer));
 			
 		} else if (((StoreState)state).getOpenStatus() 
 			&& ((StoreState)state).getCustomersInStore() == ((StoreState)state).getMaxCapacity()) {
@@ -37,7 +37,7 @@ public class ArrivalEvent extends Event{
 			((StoreState)state).updateMissedCustomers(); // Ökar missade antalet kunder med 1
 			
 			//Lägg till i Queue ett nytt arrivalEvent
-			eventQueue.addToQueue(new ArrivalEvent((StoreState)state, ((StoreState)state).getArrivalTime()));
+			eventQueue.addToQueue(new ArrivalEvent((StoreState)state, eventQueue, ((StoreState)state).getArrivalTime()));
 			
 		}
 		((StoreState)state).updateLatestEventCustomer(customer);

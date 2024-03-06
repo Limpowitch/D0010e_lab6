@@ -7,7 +7,7 @@ import General.GeneralView;
 import java.util.Observable;
 
 import General.EventQueue;
-import Helper_Functions.K;
+//import Helper_Functions.K;
 
 public class View extends GeneralView {
 
@@ -43,7 +43,7 @@ public class View extends GeneralView {
 	}
 	public void printStoreStats() {
 	    String updatingMessage =
-	            storeState.returnCurrentTime() + " "
+	    		String.format("%.4s ", storeState.returnCurrentTime()) + " "
 	            + storeState.getLatestEvent() + " "
 	            + storeState.getLatestEventCustomer() + " "
 	            + storeState.getOpenStatus() + " "

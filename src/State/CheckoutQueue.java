@@ -17,4 +17,24 @@ public class CheckoutQueue extends FIFO {
 		this.removeFirst();
 		return customer;
 	}
+	
+	public String getCurrentQueue()
+	{
+		FIFO queue = new FIFO();
+		
+		String wholequeue = queue.toString();
+		
+			
+		return wholequeue;
+	}
+	
+	public boolean queuetime()
+	{
+		boolean check = false;
+		if(super.getSize() == 0) {
+			check = true;
+			return check;
+		}
+		return check;
+	}
 }

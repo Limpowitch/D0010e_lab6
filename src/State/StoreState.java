@@ -5,19 +5,19 @@ import State.PickTime;
 import State.PayTime;
 
 public class StoreState extends State {
-    final ArrivalTime arrivalTime;
+	final ArrivalTime arrivalTime;
     final PickTime pickTime;
     final PayTime payTime;
-    private boolean isOpen;
+    private boolean isOpen = false;
     private int maxCapacity;
-    private int customersInStore;
-    private int highestCustomerID;
-    private int missedCustomers;
-    private int paidCustomers;
+    private int customersInStore = 0;
+    private int highestCustomerID = -1;
+    private int missedCustomers = 0;
+    private int paidCustomers = 0;
     private CheckoutQueue checkoutQueue;
-    private int totalCustomersBeenInQueue;
-    private int customersHasCheckedOut;
+    private int totalCustomersBeenInQueue = 0;
     private int maxCheckoutCapacity;
+    private int customersHasCheckedOut;
     private String latestEventName;
     private int currentCheckoutCapacity;
     private int latestEventCustomer;
@@ -28,21 +28,15 @@ public class StoreState extends State {
 	private double pickHigh;
 	private double payLow;
 	private double payHigh;
+	private double populatedQueueTime;
+	private double emptyqueueTime;
 	
 	//TODO:
 	//Skapa alla updates/getter för alla olika store-variabler
-	public StoreState(double lambda, long seed, int maxCapacity) {
+	public StoreState(int seed, double lambda, int maxCapacity, int maxCheckoutCapacity, double pickLow, double pickHigh, double payLow, double payHigh) {
 		super();
-		this.seed = seed; 
-		this.lambda = lambda; 
-		this.isOpen = false;
 		this.maxCapacity = maxCapacity;
-		this.customersInStore = 0;
-		this.missedCustomers = 0;
-		this.paidCustomers = 0;
-		this.currentCheckoutCapacity = maxCheckoutCapacity;
-		this.totalCustomersBeenInQueue = 0;
-		highestCustomerID = -1;
+		this.maxCheckoutCapacity = maxCheckoutCapacity;
         checkoutQueue = new CheckoutQueue();
         arrivalTime = new ArrivalTime(lambda, seed);
         pickTime = new PickTime(pickLow, pickHigh, seed);
@@ -176,4 +170,46 @@ public class StoreState extends State {
 			this.customersInStore--;
 		}
 	}
+	
+	public void registersempty()
+	{
+		//State checktime = new State();
+		
+		if(checkoutQueue.queuetime() == false)  // checks if the queue has people in it and updates time spent in it.
+		{
+			if(populatedQueueTime == 0.0)
+			{
+				populatedQueueTime = super.returnCurrentTime();
+				
+			}
+			else
+			{
+				double timetemp =  super.returnCurrentTime() - populatedQueueTime;
+				populatedQueueTime += timetemp; 
+			}
+		}
+		else // if the queue is empty, another timer is started to measure queued time spent in it.
+		{
+			if(emptyqueueTime == 0.0)
+			{
+				emptyqueueTime = super.returnCurrentTime(); 
+			}
+			else
+			{
+				double timetemp = super.returnCurrentTime() - emptyqueueTime;
+				emptyqueueTime += timetemp;
+			}
+			
+		}
+		
+	}
+	public double getPopulatedQueueTime()
+	{
+		return populatedQueueTime;
+	}
+	public double getEmptyQueueTime() {
+		
+		return emptyqueueTime;
+	}
+
 }
