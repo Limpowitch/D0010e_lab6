@@ -11,13 +11,16 @@ public class EventQueue extends ArrayList<Event> {
     
     // Lägger till event i queue
     public void addToQueue(Event event) {
-    	int startingSize = this.size();
         if (this.isEmpty()) {
             this.add(event);
         } else {
-            for (int i = 0; i < startingSize; i++) {
+            for (int i = 0; i < this.size(); i++) {
                 if (this.get(i).returnExecuteTime() > event.returnExecuteTime()) {
                     this.add(i, event);
+                    break;
+                } else if (i == this.size() - 1){
+                    this.add(event);
+                    break;
                 }
             }
         }

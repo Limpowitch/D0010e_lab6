@@ -13,10 +13,9 @@ import View.View;
 public class RunSim {
 	public static void main(String[] args) {
 		RunSim runSim = new RunSim();
-		runSim.startNew();
 	}
 	
-	private void startNew () {
+	public RunSim() {
 		//State state = new State();
 		StoreState storeState = new StoreState
 				(1234, 

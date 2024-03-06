@@ -26,6 +26,8 @@ public class StartEvent extends Event {
 		
 		view.printBeginStore();
 		
+		
+		
 	}
 
 }

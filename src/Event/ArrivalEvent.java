@@ -45,6 +45,8 @@ public class ArrivalEvent extends Event{
 		((StoreState)state).updateLatestEventCustomer(customer);
 		((StoreState)state).updateLatestEvent("Arrival");
 		state.notifyObserver();
+		
+		
 
 		
 	}

@@ -19,7 +19,7 @@ public class StoreState extends State {
     private int maxCheckoutCapacity;
     private int customersHasCheckedOut;
     private String latestEventName;
-    private int currentCheckoutCapacity;
+    private int currentInCheckout;
     private int latestEventCustomer;
     private int totalCustomers;
 	private long seed;
@@ -93,8 +93,8 @@ public class StoreState extends State {
 		return this.latestEventCustomer;
 	}
 	
-	public int getCurrentCheckoutCapacity() {
-		return this.currentCheckoutCapacity;
+	public int getCurrentInCheckout() {
+		return this.currentInCheckout;
 	}
 	
 	public boolean getOpenStatus() {

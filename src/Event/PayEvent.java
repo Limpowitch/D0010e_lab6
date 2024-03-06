@@ -12,6 +12,7 @@ public class PayEvent extends Event{
 
 	public PayEvent(State state, double executeTime, EventQueue eventQueue, Customer customer) {
 		super(state, eventQueue, executeTime);
+		this.customer = customer;
 		// TODO Auto-generated constructor stub
 	}
 

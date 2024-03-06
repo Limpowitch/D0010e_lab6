@@ -47,7 +47,7 @@ public class View extends GeneralView {
 	            + storeState.getLatestEvent() + " "
 	            + storeState.getLatestEventCustomer() + " "
 	            + storeState.getOpenStatus() + " "
-	            + storeState.getCurrentCheckoutCapacity() + " "
+	            + (storeState.getMaxCheckoutCapacity() - storeState.getCurrentInCheckout()) + " "
 	            + storeState.getEmptyQueueTime() + " " // Assuming there's a method named getLedigTid in StoreState
 	            + storeState.getCustomersInStore() + " "
 	            + storeState.getCustomersHasCheckedOut() + " "
@@ -64,7 +64,7 @@ public class View extends GeneralView {
 	            "RESULTAT\n"
 	            + "========\n"
 	            + "1) Av " + storeState.getTotalCustomers() + " kunder handlade " + storeState.getCustomersHasCheckedOut() + " medan " + storeState.getMissedCustomers() + " missades.\n"
-	            + "2) Total tid " + storeState.getCurrentCheckoutCapacity() + " kassor varit lediga: " + storeState.getEmptyQueueTime() + " te.\n"
+	            + "2) Total tid " + (storeState.getMaxCheckoutCapacity() - storeState.getCurrentInCheckout()) + " kassor varit lediga: " + storeState.getEmptyQueueTime() + " te.\n"
 	            + "Genomsnittlig ledig kassatid: " + storeState.returnCurrentTime()/storeState.getTotalCustomersBeenInQueue() + " te"
 	            + "3) Total tid " + storeState.getTotalCustomersBeenInQueue() + " kunder tvingats köa: " + storeState.getPopulatedQueueTime() + " te.\n"
 	            + "Genomsnittlig kötid: " + storeState.getPopulatedQueueTime()/storeState.getTotalCustomersBeenInQueue()+ " te.\n";

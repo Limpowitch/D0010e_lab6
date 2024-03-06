@@ -11,6 +11,7 @@ public class PickEvent extends Event{
 
 	public PickEvent(State state, double executeTime, EventQueue eventQueue, Customer customer) {
 		super(state, eventQueue, executeTime);
+		this.customer = customer;
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -19,10 +20,10 @@ public class PickEvent extends Event{
 
 		//Om antalet kunder i kön inte är max capacity
 		//TODO: unfucka den här 
-		if (((StoreState)state).getCheckoutQueue().getSize() != ((StoreState)state).getMaxCheckoutCapacity()) {
+		if (((StoreState)state).getCurrentInCheckout() != ((StoreState)state).getMaxCheckoutCapacity()) {
 			//TODO: Lägg till relevanta storestate updates
 			//Lägg till nytt payEvent
-			eventQueue.addToQueue(new PayEvent((StoreState)state, ((StoreState)state).getPayTime(), eventQueue, ((StoreState)state).getCheckoutQueue().getFirstCustomer()));
+			eventQueue.addToQueue(new PayEvent((StoreState)state, ((StoreState)state).getPayTime(), eventQueue, customer));
 			
 		//Om antalet kunder är detsamma som max capacity
 		} else {
