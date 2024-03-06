@@ -15,7 +15,8 @@ public class PickEvent extends Event{
 	}
 	
 	public void execute() {
-		
+		state.update(this);
+
 		//Om antalet kunder i kön inte är max capacity
 		//TODO: unfucka den här 
 		if (((StoreState)state).getCheckoutQueue().getSize() != ((StoreState)state).getMaxCheckoutCapacity()) {
@@ -31,7 +32,8 @@ public class PickEvent extends Event{
 		}
 		((StoreState)state).updateLatestEventCustomer(customer);
 		((StoreState)state).updateLatestEvent("Pick");
-		state.update(this);
+		state.notifyObserver();
+
 
 	}
 }

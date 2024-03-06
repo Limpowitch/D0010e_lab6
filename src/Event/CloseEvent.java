@@ -14,11 +14,12 @@ public class CloseEvent extends Event{
 	}
 	
 	public void execute() {
+		state.update(this);
+
 		((StoreState)state).setOpenStatus(false);
 		String customer = "---";
 		//Uppdatera StoreState med relevant information
 		((StoreState)state).updateLatestEvent("Close");
-		state.update(this);
 
 	}
 

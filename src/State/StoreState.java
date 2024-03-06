@@ -35,7 +35,14 @@ public class StoreState extends State {
 	//Skapa alla updates/getter för alla olika store-variabler
 	public StoreState(int seed, double lambda, int maxCapacity, int maxCheckoutCapacity, double pickLow, double pickHigh, double payLow, double payHigh) {
 		super();
+		this.lambda = lambda;
+		this.seed = seed;
+		this.pickLow = pickLow;
+		this.pickHigh = pickHigh;
+		this.payLow = payLow;
+		this.payHigh = payHigh;
 		this.maxCapacity = maxCapacity;
+		this.latestEventName = "Arrival";
 		this.maxCheckoutCapacity = maxCheckoutCapacity;
         checkoutQueue = new CheckoutQueue();
         arrivalTime = new ArrivalTime(lambda, seed);

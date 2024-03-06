@@ -10,6 +10,7 @@ public class State extends Observable{
 	public State() {
 		this.isRunning = true;
 		this.currentTime = 0;
+		this.previousTime = 0;
 	}
 	
 	public void stopSim() {
@@ -28,10 +29,14 @@ public class State extends Observable{
 		//Vi behöver en previousTime för att göra kö-tid calculations etc
 		this.previousTime = this.currentTime;
 		this.currentTime = event.returnExecuteTime();
-		setChanged();
-		notifyObservers();
+		
 		//Vi vill ge en notify till observers att något har hänt
 		
+	}
+	
+	public void notifyObserver() {
+		setChanged();
+		notifyObservers();
 	}
 	
 	

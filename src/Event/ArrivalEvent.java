@@ -17,6 +17,8 @@ public class ArrivalEvent extends Event{
 	public void execute() {
 		
 		//Skapa customer
+		state.update(this); //uppdaterar klockan
+
 		Customer customer = ((StoreState)state).generatedCustomer();
 		((StoreState)state).updateTotalCustomers();
 		
@@ -24,13 +26,13 @@ public class ArrivalEvent extends Event{
 		if (((StoreState)state).getOpenStatus() 
 			&& ((StoreState)state).getCustomersInStore() < ((StoreState)state).getMaxCapacity() ) {
 			
-			((StoreState)state).updateStoreCount(true); // ökar antalet i affären med 1
 			
 			//Lägg till i Queue ett nytt arrivalEvent
 			eventQueue.addToQueue(new ArrivalEvent((StoreState)state, eventQueue, ((StoreState)state).getArrivalTime()));
 			//Lägg till i Queue ett nytt pickEvent
 			eventQueue.addToQueue(new PickEvent((StoreState)state, ((StoreState)state).getPickTime(), eventQueue, customer));
-			
+			((StoreState)state).updateStoreCount(true); // ökar antalet i affären med 1
+
 		} else if (((StoreState)state).getOpenStatus() 
 			&& ((StoreState)state).getCustomersInStore() == ((StoreState)state).getMaxCapacity()) {
 			
@@ -42,7 +44,7 @@ public class ArrivalEvent extends Event{
 		}
 		((StoreState)state).updateLatestEventCustomer(customer);
 		((StoreState)state).updateLatestEvent("Arrival");
-		state.update(this); //uppdaterar klockan
+		state.notifyObserver();
 
 		
 	}

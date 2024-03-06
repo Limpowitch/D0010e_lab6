@@ -16,6 +16,8 @@ public class PayEvent extends Event{
 	}
 
 	public void execute() {
+		state.update(this);
+
 		//Uppdatera StoreState med relevant information
 		
 		((StoreState)state).updateStoreCount(false); // minskar antalet i affären med 1
@@ -26,7 +28,8 @@ public class PayEvent extends Event{
 		}
 		((StoreState)state).updateLatestEventCustomer(customer);
 		((StoreState)state).updateLatestEvent("Pay");
-		state.update(this);
+		state.notifyObserver();
+
 
 
 	}
