@@ -1,31 +1,60 @@
 package State;
-import java.time.LocalTime;
-import java.util.*;
-public class CheckoutQueue{
 
-	private int queueTime;
-	private int queuedCostumers;
-	List<Integer> queue = new ArrayList<Integer>();
+import Helper_Functions.FIFO;
+import java.util.ArrayList;
+
+public class CheckoutQueue extends FIFO {
 	
-	
-	
-	public float queueTimer() {
-		/* The timer is supposed to detect if there is someone in the queue or not and start if there
-		 * is someone present and finish and calculate total time that there has been costumers in the queue
-		 */
-		//LocalTime startTimer = new LocalTime.now();
-		
-		
-		
+	public CheckoutQueue() {
+		super();
 	}
 	
+	public void addCustomer(Customer customer) {
+		this.add(customer);
+	}
+
+	public Customer getFirstCustomer() {
+		Customer customer = (Customer) super.getFirst();
+		this.removeFirst();
+		return customer;
+	}
 	
-	public void addToRegisterQueue(int costumer)
+	public String getCurrentQueue()
 	{
-		queue.add(costumer);
-		return;
+		// converting the contents of the FIFO queue to a string that can be printed.
+		FIFO queue = new FIFO();
+		int size = queue.getSize();
+		String wholequeue ="[";
+		for(int i=0;i<=size;i++)
+		{
+			if(size == 0)
+			{
+				break;
+			}
+			else
+			{
+				wholequeue = wholequeue +  (String) queue.getIndex(i)  + ",";	
+			}
+		}
+		if(size == 0)
+		{
+			wholequeue ="[]";
+		}
+		else
+		{
+			wholequeue = wholequeue  + "]";
+		}
+	
+		return wholequeue;
 	}
 	
-	
-	
+	public boolean queuetime()
+	{
+		boolean check = false;
+		if(super.getSize() == 0) {
+			check = true;
+			return check;
+		}
+		return check;
+	}
 }

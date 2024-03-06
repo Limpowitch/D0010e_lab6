@@ -3,20 +3,29 @@ package Event;
 import General.Event;
 import General.EventQueue;
 import General.State;
+import State.StoreState;
+import View.View;
 
 public class StartEvent extends Event {
-
-	public StartEvent(State state, double executeTime, EventQueue eventQueue) {
-		super(state, executeTime, eventQueue);
+	private View view;
+	public StartEvent(State state, double executeTime, EventQueue eventQueue, View view) {
+		super(state, eventQueue ,executeTime);
+		this.view = view;
 		// TODO Auto-generated constructor stub
 	}
 	
 	public void execute() {
-		super.execute();
-		state.update(this); // Vi uppdaterar state klockan med executeTime
-		//Uppdatera StoreState med relevant information
+		
+		
+		
+		((StoreState)state).setOpenStatus(true);//Öppna affären i StoreState
+		
 		//Lägg till ArrivalEvent i Queue
-		//ArrivalEvent behöver state, arrivalTime, eventQueue
+		eventQueue.addToQueue(new ArrivalEvent((StoreState)state, eventQueue, ((StoreState)state).getArrivalTime()));
+		//ArrivalEvent behöver state, arrivalTime
+		
+		view.printBeginStore();
+		
 	}
 
 }

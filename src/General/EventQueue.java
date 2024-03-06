@@ -4,18 +4,30 @@ import java.util.ArrayList;
 
 public class EventQueue extends ArrayList<Event> {
 
-	public EventQueue() {
-		super();
-	}
-	
-	//Lägger till event i queue
-	public void addToQueue(Event event) {
-		//Sortera efter executeTime
-		//executeTime för ett specifikt event går att få genom returnExecuteTime()
-		
-	}
-	
-	//Vi behöver ingen metod för removeFromQueue.
-	//Då EventQueue är en ArrayList, så kan Simulator använda sig av .remove
-	
+    public EventQueue() {
+        super();
+    }
+    
+    
+    // Lägger till event i queue
+    public void addToQueue(Event event) {
+    	int startingSize = this.size();
+        if (this.isEmpty()) {
+            this.add(event);
+        } else {
+            for (int i = 0; i < startingSize; i++) {
+                if (this.get(i).returnExecuteTime() > event.returnExecuteTime()) {
+                    this.add(i, event);
+                }
+            }
+        }
+    }
+    
+    
+
+    // Sortera efter executeTime
+    // executeTime för ett specifikt event går att få genom returnExecuteTime()
+
+    // Vi behöver ingen metod för removeFromQueue.
+    // Då EventQueue är en ArrayList, så kan Simulator använda sig av .remove
 }
