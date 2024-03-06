@@ -8,7 +8,7 @@ public class StoreState extends State {
 	final ArrivalTime arrivalTime;
     final PickTime pickTime;
     final PayTime payTime;
-    private boolean isOpen = false;
+    private int isOpen = 0;
     private int maxCapacity;
     private int customersInStore = 0;
     private int highestCustomerID = -1;
@@ -97,7 +97,7 @@ public class StoreState extends State {
 		return this.currentInCheckout;
 	}
 	
-	public boolean getOpenStatus() {
+	public int getOpenStatus() {
 		return this.isOpen;
 	}
 	
@@ -117,8 +117,8 @@ public class StoreState extends State {
 		return this.maxCapacity;
 	}
 	
-	public int getCustomersHasCheckedOut() {
-		return customersHasCheckedOut;
+	public int getPaidCustomers() {
+		return this.paidCustomers;
 	}
 	
 	public int getMaxCheckoutCapacity() {
@@ -150,11 +150,13 @@ public class StoreState extends State {
 	}
 	
 	public Customer generatedCustomer() {
-		return new Customer(this.highestCustomerID + 1);
+		int highestCustomerIDHolder = this.highestCustomerID;
+		this.highestCustomerID = this.highestCustomerID + 1;
+		return new Customer(highestCustomerIDHolder + 1);
 	}
 	
 	
-	public void setOpenStatus(boolean openStatus) {
+	public void setOpenStatus(int openStatus) {
 			this.isOpen = openStatus;
 	}
 	
@@ -162,8 +164,8 @@ public class StoreState extends State {
 		this.latestEventName = string;
 	}
 	
-	public void updateLatestEventCustomer(Customer customer) {
-		latestEventCustomer = customer.customerID;
+	public void updateLatestEventCustomer(int customer) {
+		latestEventCustomer = customer;
 	}
 	
 	public void updateTotalCustomers() {
@@ -217,6 +219,15 @@ public class StoreState extends State {
 	public double getEmptyQueueTime() {
 		
 		return emptyqueueTime;
+	}
+
+	public void updateCurrentInCheckout(boolean b) {
+		if(b) {
+			this.currentInCheckout++;
+		} else {
+			this.currentInCheckout--;
+		}
+		
 	}
 
 }

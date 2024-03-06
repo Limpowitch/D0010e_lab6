@@ -18,10 +18,10 @@ public class StartEvent extends Event {
 		
 		
 		
-		((StoreState)state).setOpenStatus(true);//Öppna affären i StoreState
+		((StoreState)state).setOpenStatus(1);//Öppna affären i StoreState
 		
 		//Lägg till ArrivalEvent i Queue
-		eventQueue.addToQueue(new ArrivalEvent((StoreState)state, eventQueue, ((StoreState)state).getArrivalTime()));
+		eventQueue.addToQueue(new ArrivalEvent((StoreState)state, eventQueue, ((StoreState)state).getArrivalTime(), ((StoreState)state).generatedCustomer()));
 		//ArrivalEvent behöver state, arrivalTime
 		
 		view.printBeginStore();

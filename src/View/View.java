@@ -44,17 +44,17 @@ public class View extends GeneralView {
 	public void printStoreStats() {
 	    String updatingMessage =
 	    		String.format("%.4s ", storeState.returnCurrentTime()) + " "
-	            + storeState.getLatestEvent() + " "
-	            + storeState.getLatestEventCustomer() + " "
+	            + String.format("%-8s", storeState.getLatestEvent()) + " "
+	            + String.format("%2d", storeState.getLatestEventCustomer()) + " "
 	            + storeState.getOpenStatus() + " "
-	            + (storeState.getMaxCheckoutCapacity() - storeState.getCurrentInCheckout()) + " "
-	            + storeState.getEmptyQueueTime() + " " // Assuming there's a method named getLedigTid in StoreState
+	            + String.format("%3d", (storeState.getMaxCheckoutCapacity() - storeState.getCurrentInCheckout())) + " "
+	            + String.format("%4.0f", storeState.getEmptyQueueTime()) + " " // Assuming there's a method named getLedigTid in StoreState
 	            + storeState.getCustomersInStore() + " "
-	            + storeState.getCustomersHasCheckedOut() + " "
-	            + storeState.getMissedCustomers() + " "
-	            + storeState.getTotalCustomersBeenInQueue() + " "
+	            + String.format("%2d", storeState.getPaidCustomers()) + " "
+	            + String.format("%3d", storeState.getMissedCustomers()) + " "
+	            + String.format("%4d", storeState.getTotalCustomersBeenInQueue()) + " "
 	            + storeState.getPopulatedQueueTime() + " " // Assuming there's a method named getKötid in StoreState
-	            + storeState.getCheckoutQueue().getSize() + " "
+	            + String.format("%4d", storeState.getCheckoutQueue().getSize()) + " "
 	            + storeState.getCheckoutQueue().getCurrentQueue() + "\n\n"; // Assuming there's a method named getKasseStringFormat in StoreState
 	    System.out.print(updatingMessage);
 	}
@@ -63,7 +63,7 @@ public class View extends GeneralView {
 	    String closingMessage =
 	            "RESULTAT\n"
 	            + "========\n"
-	            + "1) Av " + storeState.getTotalCustomers() + " kunder handlade " + storeState.getCustomersHasCheckedOut() + " medan " + storeState.getMissedCustomers() + " missades.\n"
+	            + "1) Av " + storeState.getTotalCustomers() + " kunder handlade " + storeState.getPaidCustomers() + " medan " + storeState.getMissedCustomers() + " missades.\n"
 	            + "2) Total tid " + (storeState.getMaxCheckoutCapacity() - storeState.getCurrentInCheckout()) + " kassor varit lediga: " + storeState.getEmptyQueueTime() + " te.\n"
 	            + "Genomsnittlig ledig kassatid: " + storeState.returnCurrentTime()/storeState.getTotalCustomersBeenInQueue() + " te"
 	            + "3) Total tid " + storeState.getTotalCustomersBeenInQueue() + " kunder tvingats köa: " + storeState.getPopulatedQueueTime() + " te.\n"

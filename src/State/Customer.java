@@ -8,10 +8,6 @@ public class Customer {
 	public Customer(int customerID) {
 		this.customerID = customerID;
 	}
-	
-	public int customerNumber() {
-		return customerID;
-	}
 }
 
 
