@@ -1,6 +1,7 @@
 package State;
 
 import Helper_Functions.FIFO;
+import java.util.ArrayList;
 
 public class CheckoutQueue extends FIFO {
 	
@@ -20,11 +21,30 @@ public class CheckoutQueue extends FIFO {
 	
 	public String getCurrentQueue()
 	{
+		// converting the contents of the FIFO queue to a string that can be printed.
 		FIFO queue = new FIFO();
-		
-		String wholequeue = queue.toString();
-		
-			
+		int size = queue.getSize();
+		String wholequeue ="[";
+		for(int i=0;i<=size;i++)
+		{
+			if(size == 0)
+			{
+				break;
+			}
+			else
+			{
+				wholequeue = wholequeue +  (String) queue.getIndex(i)  + ",";	
+			}
+		}
+		if(size == 0)
+		{
+			wholequeue ="[]";
+		}
+		else
+		{
+			wholequeue = wholequeue  + "]";
+		}
+	
 		return wholequeue;
 	}
 	
@@ -38,3 +58,4 @@ public class CheckoutQueue extends FIFO {
 		return check;
 	}
 }
+

@@ -35,4 +35,11 @@ public class FIFO {
 	public Object getFirst() {
 		return FIFO.get(0);
 	}
+	public Object getIndex(int i)
+	{
+		return FIFO.get(i);
+	
+	}
+	
+	
 }

@@ -38,14 +38,14 @@ public class View extends GeneralView {
 				+ "Frö, f...................: " + storeState.getSeed() + "\n\n"
 				+ "FÖRLOPP\n"
 				+ "=======\n"
-				+ "Tid Händelse Kund ? led ledT I $ :-( köat köT köar [Kassakö..]\n";
+				+ "Tid  Händelse Kund ? led ledT I  $ :-( köat köT köar [Kassakö..]\n";
 		System.out.print(openingMessage);
 	}
 	public void printStoreStats() {
 	    String updatingMessage =
 	    		String.format("%.4s ", storeState.returnCurrentTime()) + " "
-	            + String.format("%-8s", storeState.getLatestEvent()) + " "
-	            + String.format("%2d", storeState.getLatestEventCustomer()) + " "
+	            + String.format("%7s", storeState.getLatestEvent()) + " "
+	            + String.format("%4d", storeState.getLatestEventCustomer()) + " "
 	            + storeState.getOpenStatus() + " "
 	            + String.format("%3d", (storeState.getMaxCheckoutCapacity() - storeState.getCurrentInCheckout())) + " "
 	            + String.format("%4.0f", storeState.getEmptyQueueTime()) + " " // Assuming there's a method named getLedigTid in StoreState
