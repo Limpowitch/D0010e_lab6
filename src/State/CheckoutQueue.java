@@ -19,33 +19,18 @@ public class CheckoutQueue extends FIFO {
 		return customer;
 	}
 	
-	public String getCurrentQueue()
-	{
-		// converting the contents of the FIFO queue to a string that can be printed.
-		FIFO queue = new FIFO();
-		int size = queue.getSize();
-		String wholequeue ="[";
-		for(int i=0;i<=size;i++)
-		{
-			if(size == 0)
-			{
-				break;
-			}
-			else
-			{
-				wholequeue = wholequeue +  (String) queue.getIndex(i)  + ",";	
-			}
-		}
-		if(size == 0)
-		{
-			wholequeue ="[]";
-		}
-		else
-		{
-			wholequeue = wholequeue  + "]";
-		}
-	
-		return wholequeue;
+	public String getCurrentQueue() {
+	    int size = this.getSize();
+	    StringBuilder wholequeue = new StringBuilder("[");
+	    for (int i = 0; i < size; i++) {
+	        Customer customer = (Customer) this.getIndex(i);
+	        wholequeue.append(customer.getCustomerID());
+	        if (i < size - 1) {
+	            wholequeue.append(",");
+	        }
+	    }
+	    wholequeue.append("]");
+	    return wholequeue.toString();
 	}
 	
 	public boolean queuetime()

@@ -180,6 +180,7 @@ public class StoreState extends State {
 		}
 	}
 	
+	
 	public void registersempty()
 	{
 		//State checktime = new State();
@@ -188,25 +189,27 @@ public class StoreState extends State {
 		{
 			if(populatedQueueTime == 0.0)
 			{
-				populatedQueueTime = super.returnCurrentTime();
+				populatedQueueTime = super.returnCurrentTime() - super.returnPreviousTime();
 				
 			}
 			else
 			{
-				double timetemp =  super.returnCurrentTime() - populatedQueueTime;
-				populatedQueueTime += timetemp; 
+				//double timetemp =  super.returnCurrentTime() - populatedQueueTime;
+				//populatedQueueTime += timetemp; 
+				populatedQueueTime = populatedQueueTime + (super.returnCurrentTime() - super.returnPreviousTime());
 			}
 		}
 		else // if the queue is empty, another timer is started to measure queued time spent in it.
 		{
 			if(emptyqueueTime == 0.0)
 			{
-				emptyqueueTime = super.returnCurrentTime(); 
+				emptyqueueTime = super.returnCurrentTime() - super.returnPreviousTime();
 			}
 			else
 			{
-				double timetemp = super.returnCurrentTime() - emptyqueueTime;
-				emptyqueueTime += timetemp;
+				//double timetemp = super.returnCurrentTime() - emptyqueueTime;
+				//emptyqueueTime += timetemp;
+				emptyqueueTime = emptyqueueTime + (super.returnCurrentTime() - super.returnPreviousTime());
 			}
 			
 		}

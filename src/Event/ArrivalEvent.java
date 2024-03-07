@@ -22,7 +22,7 @@ public class ArrivalEvent extends Event{
 		//Skapa customer
 		state.update(this); //uppdaterar klockan
 
-		
+		((StoreState)state).registersempty();
 		//Kolla om affär är öppen och att det inte är fullt
 		if (((StoreState)state).getOpenStatus() == 1 
 			&& ((StoreState)state).getCustomersInStore() < ((StoreState)state).getMaxCapacity() ) {

@@ -20,7 +20,8 @@ public class PayEvent extends Event{
 		state.update(this);
 
 		//Uppdatera StoreState med relevant information
-	
+		((StoreState)state).registersempty();
+
 		((StoreState)state).updateStoreCount(false); // minskar antalet i affären med 1
 		((StoreState)state).updatePaidCustomers(); // ökar antalet kunder som har betalat med 1
 		
