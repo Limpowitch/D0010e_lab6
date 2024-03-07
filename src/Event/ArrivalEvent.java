@@ -24,7 +24,7 @@ public class ArrivalEvent extends Event{
 
 		((StoreState)state).registersempty();
 		//Kolla om affär är öppen och att det inte är fullt
-		if (((StoreState)state).getOpenStatus() == 1 
+		if (((StoreState)state).getOpenStatus() == "Ö" 
 			&& ((StoreState)state).getCustomersInStore() < ((StoreState)state).getMaxCapacity() ) {
 			((StoreState)state).updateTotalCustomers();
 
@@ -35,7 +35,7 @@ public class ArrivalEvent extends Event{
 			eventQueue.addToQueue(new PickEvent((StoreState)state, ((StoreState)state).getPickTime(), eventQueue, customer));
 			((StoreState)state).updateStoreCount(true); // ökar antalet i affären med 1
 
-		} else if (((StoreState)state).getOpenStatus() == 1 
+		} else if (((StoreState)state).getOpenStatus() == "Ö" 
 			&& ((StoreState)state).getCustomersInStore() == ((StoreState)state).getMaxCapacity()) {
 			((StoreState)state).updateTotalCustomers();
 

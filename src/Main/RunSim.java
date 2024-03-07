@@ -13,8 +13,10 @@ import View.View;
 public class RunSim {
 	public static void main(String[] args) {
 		RunSim runSim1 = new RunSim(1234, 1, 5, 4, 0.5, 1, 2, 3, 10); // ex1
-		RunSim runSim2 = new RunSim(13, 3, 7, 2, 0.6, 0.9, 0.35, 0.6, 8); // ex3
+		//RunSim runSim2 = new RunSim(13, 3, 7, 2, 0.6, 0.9, 0.35, 0.6, 8); // ex3
 	}
+
+	private StoreState storeState;
 	
 	public RunSim(int seed, int lambda, int maxCapacity, int maxCheckoutCapacity, double pickLow, double pickHigh, double payLow, double payHigh, double closeTime) {
 		//State state = new State();
@@ -35,4 +37,8 @@ public class RunSim {
 		Simulator simulator = new Simulator(storeState, eventQueue);
 		simulator.run();
 	}
+	
+	public StoreState getStoreState() {
+        return storeState; // Method to retrieve the view object
+    }
 }

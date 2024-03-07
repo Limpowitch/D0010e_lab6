@@ -16,7 +16,7 @@ public class CloseEvent extends Event{
 	public void execute() {
 		state.update(this);
 
-		((StoreState)state).setOpenStatus(0);
+		((StoreState)state).setOpenStatus("S");
 		int customer = -1;
 		//Uppdatera StoreState med relevant information
 		((StoreState)state).updateLatestEventCustomer(customer);

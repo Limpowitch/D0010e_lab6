@@ -38,23 +38,23 @@ public class View extends GeneralView {
 				+ "Frö, f...................: " + storeState.getSeed() + "\n\n"
 				+ "FÖRLOPP\n"
 				+ "=======\n"
-				+ "Tid  Händelse Kund ? led ledT I  $ :-( köat köT köar [Kassakö..]\n"
-				+ "0.00    Start\n";
+				+ "Tid Händelse Kund ? led ledT I  $ :-( köat  köT köar [Kassakö..]\n"
+				+ "0.00   Start\n";
 		System.out.print(openingMessage);
 	}
 	public void printStoreStats() {
 	    String updatingMessage =
-	    		String.format("%.4s ", storeState.returnCurrentTime()) + " "
-	            + String.format("%7s", storeState.getLatestEvent()) + " "
+	    		String.format("%.2f", storeState.returnCurrentTime()) + " "
+	    		+ String.format("%7s", storeState.getLatestEvent()) + " "
 	            + String.format("%4d", storeState.getLatestEventCustomer()) + " "
 	            + storeState.getOpenStatus() + " "
 	            + String.format("%3d", (storeState.getMaxCheckoutCapacity() - storeState.getCurrentInCheckout())) + " "
-	            + String.format("%.4s", storeState.getEmptyQueueTime()) + " " // Assuming there's a method named getLedigTid in StoreState
+	            + String.format("%.2f", storeState.getEmptyQueueTime()) + " " // Assuming there's a method named getLedigTid in StoreState
 	            + storeState.getCustomersInStore() + " "
 	            + String.format("%2d", storeState.getPaidCustomers()) + " "
 	            + String.format("%3d", storeState.getMissedCustomers()) + " "
 	            + String.format("%4d", storeState.getTotalCustomersBeenInQueue()) + " "
-	            + String.format("%.4s", storeState.getPopulatedQueueTime()) + " " // Assuming there's a method named getKötid in StoreState
+	            + String.format("%.2f", storeState.getPopulatedQueueTime()) + " " // Assuming there's a method named getKötid in StoreState
 	            + String.format("%4d", storeState.getCheckoutQueue().getSize()) + " "
 	            + storeState.getCheckoutQueue().getCurrentQueue() + "\n\n"; // Assuming there's a method named getKasseStringFormat in StoreState
 	    System.out.print(updatingMessage);
@@ -62,13 +62,13 @@ public class View extends GeneralView {
 	
 	public void printCloseStore() {
 	    String closingMessage =
-	    		"999       End\n"
+	    		"999      End\n"
 	            + "RESULTAT\n"
 	            + "========\n"
 	            + "1) Av " + storeState.getTotalCustomers() + " kunder handlade " + storeState.getPaidCustomers() + " medan " + storeState.getMissedCustomers() + " missades.\n"
-	            + "2) Total tid " + (storeState.getMaxCheckoutCapacity() - storeState.getCurrentInCheckout()) + " kassor varit lediga: " + String.format("%.4s", storeState.getEmptyQueueTime()) + " te. "
+	            + "2) Total tid " + (storeState.getMaxCheckoutCapacity() - storeState.getCurrentInCheckout()) + " kassor varit lediga: " + String.format("%.2f", storeState.getEmptyQueueTime()) + " te. "
 	            + "Genomsnittlig ledig kassatid: " + String.format("%.4s", storeState.getEmptyQueueTime()/storeState.getMaxCheckoutCapacity()) + " te\n"
-	            + "3) Total tid " + storeState.getTotalCustomersBeenInQueue() + " kunder tvingats köa: " + String.format("%.4s", storeState.getPopulatedQueueTime()) + " te.\n"
+	            + "3) Total tid " + storeState.getTotalCustomersBeenInQueue() + " kunder tvingats köa: " + String.format("%.2f", storeState.getPopulatedQueueTime()) + " te.\n"
 	            + "Genomsnittlig kötid: " + String.format("%.4s", storeState.getPopulatedQueueTime()/storeState.getTotalCustomersBeenInQueue())+ " te.\n";
 	    System.out.print(closingMessage);
 	}

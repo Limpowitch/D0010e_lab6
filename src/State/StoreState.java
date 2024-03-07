@@ -8,7 +8,7 @@ public class StoreState extends State {
 	final ArrivalTime arrivalTime;
     final PickTime pickTime;
     final PayTime payTime;
-    private int isOpen = 0;
+    private String isOpen = "S";
     private int maxCapacity;
     private int customersInStore = 0;
     private int highestCustomerID = -1;
@@ -97,7 +97,7 @@ public class StoreState extends State {
 		return this.currentInCheckout;
 	}
 	
-	public int getOpenStatus() {
+	public String getOpenStatus() {
 		return this.isOpen;
 	}
 	
@@ -156,8 +156,8 @@ public class StoreState extends State {
 	}
 	
 	
-	public void setOpenStatus(int openStatus) {
-			this.isOpen = openStatus;
+	public void setOpenStatus(String string) {
+			this.isOpen = string;
 	}
 	
 	public void updateLatestEvent(String string) {
