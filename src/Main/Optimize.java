@@ -1,59 +1,107 @@
 package Main;
 import Main.RunSim;
-//import Helper_Functions.K;
+import Helper_Functions.K;
 import java.util.ArrayList;
-public class Optimize {
+import java.util.Random;
+import java.util.Scanner;
 
-	private int maxCapacity=5;
-	private double lambda=1;
-	private int maxCheckoutCapacity=5; 
-	private double pickLow=0.5; 
-	private double pickHigh=1; 
-	private double payLow=2; 
-	private double payHigh=3;
-	private int seed=1234;
-	
-	
-	public Optimize() 
+import State.StoreState;
+public class Optimize implements K{	
+	public static void main(String args[]) 
 	{
-		
-		
+		Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Choose an example to run (1 or 2):");
+        int choice = scanner.nextInt();
+    	Optimize optimize = new Optimize();
+
+        switch (choice) {
+            case 1:		
+                optimize.Optimizer(K.SEED);
+                break;
+            case 2:
+                optimize.loopThroughCapacity(K.SEED);
+                break;
+            default:
+                System.out.println("Error: Invalid choice.");
+                break;
+        }
 	
 	}
 	
-	public int method1(int maxCapacity)  // WIP TODO: Metoden ska bara köra en gång och returnera sluttilsståndet.
+	public int returnMissedCustomers(int maxCheckoutCapacity, int seed)  // WIP TODO: Metoden ska bara köra en gång och returnera sluttilsståndet.
 	{
-		RunSim runSim = new RunSim(1234, 1, maxCapacity, 4, 0.5, 1, 2, 3, 10); // ex1
+		//RunSim runSim = new RunSim(seed, K.L, K.M, maxCheckoutCapacity, K.LOW_COLLECTION_TIME, K.HIGH_COLLECTION_TIME, K.LOW_PAYMENT_TIME, K.HIGH_COLLECTION_TIME, K.END_TIME, 0); // ex1
+        RunSim runSim = new RunSim(seed, K.L, K.M, maxCheckoutCapacity, K.LOW_COLLECTION_TIME, K.HIGH_COLLECTION_TIME, K.LOW_PAYMENT_TIME, K.HIGH_PAYMENT_TIME, K.END_TIME, 0); // ex1
+
+		StoreState storeState = runSim.getStoreState();
 		
-		return runSim.getStoreState().getMissedCustomers();
+		storeState.updatePrintAll(0);
+		int returnedvalue = storeState.getMissedCustomers();
 		
+		return returnedvalue;
 		
 	}
-	public void alternativ2() // WIP TODO: Metoden ska steppa från 1 kassa till max antal kunder i butiken och hitta det optimala antalet kassor
+	public int loopThroughCapacity(int seed) // WIP TODO: Metoden ska steppa från 1 kassa till max antal kunder i butiken och hitta det optimala antalet kassor
 	{
+		int storeStateInitial = returnMissedCustomers(1, seed);
+		int Smallest = storeStateInitial;
 		
-		ArrayList<Integer> missed_costumers = new ArrayList<Integer>();
-		for(int testOptimum = 1;testOptimum<=maxCheckoutCapacity;testOptimum++)
+		//System.out.println("Starting smallest" + Smallest + "\n");
+		int optimalCheckout = 1;
+		for(int i = 1; i < K.M; i++)
 		{
-			int missed = method1(testOptimum);
-			missed_costumers.add(missed);
-			
+			int storeState = returnMissedCustomers(i, seed);
+			//System.out.print("This is the amount of missed customers: " + storeState + "\n");
+
+				if(Smallest > storeState)
+				{	
+					//System.out.print("found smaller" + storeState + "\n");
+					Smallest = storeState;
+					optimalCheckout = i;
+				}
+				
+			}
+		System.out.print("Optimal found checkout: " + optimalCheckout + "\n");
+		return optimalCheckout;
 		}
-		int smallest = missed_costumers.get(0);
-		for(int i = 0;i<missed_costumers.size();i++)
-		{
-			if(smallest < missed_costumers.get(i))
+		
+	
+	public void Optimizer(int seed)
+	{
+		Random random = new Random(seed);
+		int total = 0;
+		int notFoundLower = 0;
+		int indexCounter = 0;
+		int returnedInitialValue = loopThroughCapacity(random.nextInt());
+		
+		for (int i = 0; i < 100; i++) {
+			int returnedValue = loopThroughCapacity(random.nextInt());
+			//System.out.print(returnedValue);
+			
+			if(returnedInitialValue > returnedValue)
 			{
-				smallest = missed_costumers.get(i);
+				returnedInitialValue = returnedValue;
+				notFoundLower = 0;
+			} else {
+				notFoundLower++;
 			}
 			
+
+			if(notFoundLower != 100) {
+				total = total + returnedValue;
+				indexCounter++;
+			} else {
+				indexCounter++;
+				System.out.print("notFoundLower counter at 10, cant find lower. Breaking out at iteration: " + indexCounter + "\n");
+				break;
+			}
+			//System.out.println("Current indexCounter: " + indexCounter);
+			//System.out.println("Current notFoundLower: " + notFoundLower);
+
+			
+			
 		}
-		System.out.println("Missade kunder idag:" + smallest);
-		
-	}
-	public void alternativ3()
-	{
-		//TODO: Denna metod ska slumpa mellan en massa seed värden och ska hitta det minsta antal kassor som behövs till max antal kunder.
-		
+		System.out.println("Average value: " + total/indexCounter);
 	}
 }

@@ -8,8 +8,11 @@ import State.StoreState;
 
 public class CloseEvent extends Event{
 
-	public CloseEvent(State state, EventQueue eventQueue, double executeTime) {
+	private int printall;
+
+	public CloseEvent(State state, EventQueue eventQueue, double executeTime, int printall) {
 		super(state, eventQueue, executeTime);
+		this.printall = printall;
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -22,7 +25,9 @@ public class CloseEvent extends Event{
 		((StoreState)state).updateLatestEventCustomer(customer);
 		((StoreState)state).updateLatestEvent("Close");
 		
-		state.notifyObserver();
+		if (printall == 1) {
+			state.notifyObserver();
+		}
 
 	}
 

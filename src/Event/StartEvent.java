@@ -8,9 +8,11 @@ import View.View;
 
 public class StartEvent extends Event {
 	private View view;
-	public StartEvent(State state, double executeTime, EventQueue eventQueue, View view) {
+	private int printall;
+	public StartEvent(State state, double executeTime, EventQueue eventQueue, View view, int printall) {
 		super(state, eventQueue ,executeTime);
 		this.view = view;
+		this.printall = printall;
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -21,11 +23,13 @@ public class StartEvent extends Event {
 		((StoreState)state).setOpenStatus("Ö");//Öppna affären i StoreState
 		
 		//Lägg till ArrivalEvent i Queue
-		eventQueue.addToQueue(new ArrivalEvent((StoreState)state, eventQueue, ((StoreState)state).getArrivalTime(), ((StoreState)state).generatedCustomer()));
+		eventQueue.addToQueue(new ArrivalEvent((StoreState)state, eventQueue, ((StoreState)state).getArrivalTime(), ((StoreState)state).generatedCustomer(), printall));
 		//ArrivalEvent behöver state, arrivalTime
 		
-		view.printBeginStore();
-		
+		if (printall == 1) {
+			view.printBeginStore();
+
+		}
 		
 		
 	}

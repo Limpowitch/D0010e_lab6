@@ -10,10 +10,12 @@ public class ArrivalEvent extends Event{
 	
 
 	protected Customer customer;
+	private int printall;
 
-	public ArrivalEvent(State state, EventQueue eventQueue, double executeTime, Customer customer) {
+	public ArrivalEvent(State state, EventQueue eventQueue, double executeTime, Customer customer, int printall) {
 		super(state, eventQueue, executeTime);
 		this.customer = customer;
+		this.printall = printall;
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -30,9 +32,9 @@ public class ArrivalEvent extends Event{
 
 			
 			//Lägg till i Queue ett nytt arrivalEvent
-			eventQueue.addToQueue(new ArrivalEvent((StoreState)state, eventQueue, ((StoreState)state).getArrivalTime(), ((StoreState)state).generatedCustomer()));
+			eventQueue.addToQueue(new ArrivalEvent((StoreState)state, eventQueue, ((StoreState)state).getArrivalTime(), ((StoreState)state).generatedCustomer(), printall));
 			//Lägg till i Queue ett nytt pickEvent
-			eventQueue.addToQueue(new PickEvent((StoreState)state, ((StoreState)state).getPickTime(), eventQueue, customer));
+			eventQueue.addToQueue(new PickEvent((StoreState)state, ((StoreState)state).getPickTime(), eventQueue, customer, printall));
 			((StoreState)state).updateStoreCount(true); // ökar antalet i affären med 1
 
 		} else if (((StoreState)state).getOpenStatus() == "Ö" 
@@ -43,12 +45,14 @@ public class ArrivalEvent extends Event{
 			((StoreState)state).updateMissedCustomers(); // Ökar missade antalet kunder med 1
 			
 			//Lägg till i Queue ett nytt arrivalEvent
-			eventQueue.addToQueue(new ArrivalEvent((StoreState)state, eventQueue, ((StoreState)state).getArrivalTime(), ((StoreState)state).generatedCustomer()));
+			eventQueue.addToQueue(new ArrivalEvent((StoreState)state, eventQueue, ((StoreState)state).getArrivalTime(), ((StoreState)state).generatedCustomer(), 0));
 			
 		}
 		((StoreState)state).updateLatestEventCustomer(customer.customerID);
 		((StoreState)state).updateLatestEvent("Arrival");
-		state.notifyObserver();
+		if (printall == 1) {
+			state.notifyObserver();
+		}
 		
 		
 

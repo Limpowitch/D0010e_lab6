@@ -7,9 +7,11 @@ import General.State;
 
 public class EndEvent extends Event{
 	private View view;
-	public EndEvent(State state, double executeTime, EventQueue eventQueue, View view) {
+	private int printall;
+	public EndEvent(State state, double executeTime, EventQueue eventQueue, View view, int printall) {
 		super(state, eventQueue, executeTime);
 		this.view = view;
+		this.printall = printall;
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -17,7 +19,10 @@ public class EndEvent extends Event{
 		//Uppdatera StoreState med relevant information
 		state.stopSim();
 		
-		view.printCloseStore();
+		if (printall == 1) {
+			view.printCloseStore();
+
+		}
 
 		
 		

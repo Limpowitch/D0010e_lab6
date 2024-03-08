@@ -8,10 +8,12 @@ import State.StoreState;
 
 public class PickEvent extends Event{
 	protected Customer customer;
+	private int printall;
 
-	public PickEvent(State state, double executeTime, EventQueue eventQueue, Customer customer) {
+	public PickEvent(State state, double executeTime, EventQueue eventQueue, Customer customer, int printall) {
 		super(state, eventQueue, executeTime);
 		this.customer = customer;
+		this.printall = printall;
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -24,7 +26,7 @@ public class PickEvent extends Event{
 			//TODO: Lägg till relevanta storestate updates
 			//Lägg till nytt payEvent
 			((StoreState)state).updateCurrentInCheckout(true);
-			eventQueue.addToQueue(new PayEvent((StoreState)state, ((StoreState)state).getPayTime(), eventQueue, customer));
+			eventQueue.addToQueue(new PayEvent((StoreState)state, ((StoreState)state).getPayTime(), eventQueue, customer, printall));
 			
 		//Om antalet kunder är detsamma som max capacity
 		} else {
@@ -35,7 +37,9 @@ public class PickEvent extends Event{
 		}
 		((StoreState)state).updateLatestEventCustomer(customer.customerID);
 		((StoreState)state).updateLatestEvent("Pick");
-		state.notifyObserver();
+		if (printall == 1) {
+			state.notifyObserver();
+		}
 
 
 	}

@@ -30,6 +30,7 @@ public class StoreState extends State {
 	private double payHigh;
 	private double populatedQueueTime;
 	private double emptyqueueTime;
+	protected int printall;
 	
 	//TODO:
 	//Skapa alla updates/getter för alla olika store-variabler
@@ -52,6 +53,10 @@ public class StoreState extends State {
 	
 	public double getArrivalTime() {
 		return arrivalTime.generateArrivalTime(returnCurrentTime());
+	}
+	
+	public void updatePrintAll(int i) {
+		this.printall = i;
 	}
 	
 	public double getPickTime() {

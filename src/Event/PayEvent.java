@@ -8,11 +8,13 @@ import State.StoreState;
 
 public class PayEvent extends Event{
 	protected Customer customer;
+	private int printall;
 
 
-	public PayEvent(State state, double executeTime, EventQueue eventQueue, Customer customer) {
+	public PayEvent(State state, double executeTime, EventQueue eventQueue, Customer customer, int printall) {
 		super(state, eventQueue, executeTime);
 		this.customer = customer;
+		this.printall = printall;
 		// TODO Auto-generated constructor stub
 	}
 
@@ -26,13 +28,15 @@ public class PayEvent extends Event{
 		((StoreState)state).updatePaidCustomers(); // ökar antalet kunder som har betalat med 1
 		
 		if (((StoreState)state).getCheckoutQueue().getSize() > 0) {
-			eventQueue.addToQueue(new PayEvent((StoreState)state, ((StoreState)state).getPayTime(), eventQueue, ((StoreState)state).getCheckoutQueue().getFirstCustomer()));
+			eventQueue.addToQueue(new PayEvent((StoreState)state, ((StoreState)state).getPayTime(), eventQueue, ((StoreState)state).getCheckoutQueue().getFirstCustomer(), printall));
 		} else {
 			((StoreState)state).updateCurrentInCheckout(false);
 		}
 		((StoreState)state).updateLatestEventCustomer(customer.customerID);
 		((StoreState)state).updateLatestEvent("Pay");
-		state.notifyObserver();
+		if (printall == 1) {
+			state.notifyObserver();
+		}
 
 
 
