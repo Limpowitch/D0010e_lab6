@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"m":"d0010e_lab6","l":"Event"},{"m":"d0010e_lab6","l":"General"},{"m":"d0010e_lab6","l":"Helper_Functions"},{"m":"d0010e_lab6","l":"Main"},{"m":"d0010e_lab6","l":"State"},{"m":"d0010e_lab6","l":"View"}];updateSearchResults();
