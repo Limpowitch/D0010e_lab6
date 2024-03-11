@@ -24,6 +24,7 @@ public class CloseEvent extends Event{
 		//Uppdatera StoreState med relevant information
 		((StoreState)state).updateLatestEventCustomer(customer);
 		((StoreState)state).updateLatestEvent("Close");
+		((StoreState)state).registersempty();
 		
 		if (printall == 1) {
 			state.notifyObserver();

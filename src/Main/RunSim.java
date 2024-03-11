@@ -24,10 +24,10 @@ public class RunSim {
 
         switch (choice) {
             case 1:
-                RunSim runSim1 = new RunSim(1234, 1, 5, 3, 0.5, 1, 2, 3, 10, 1); // ex1
+                RunSim runSim1 = new RunSim(1234, 1, 5, 2, 0.5, 1, 2, 3, 10, 1); // ex1
                 break;
             case 2:
-                RunSim runSim2 = new RunSim(13, 3, 7, 3, 0.6, 0.9, 0.35, 0.6, 8, 1); // ex3
+                RunSim runSim2 = new RunSim(13, 3, 7, 2, 0.6, 0.9, 0.35, 0.6, 8, 1); // ex3
                 break;
             default:
                 System.out.println("Error: Invalid choice.");

@@ -24,11 +24,12 @@ public class ArrivalEvent extends Event{
 		//Skapa customer
 		state.update(this); //uppdaterar klockan
 
-		((StoreState)state).registersempty();
 		//Kolla om affär är öppen och att det inte är fullt
 		if (((StoreState)state).getOpenStatus() == "Ö" 
 			&& ((StoreState)state).getCustomersInStore() < ((StoreState)state).getMaxCapacity() ) {
+			((StoreState)state).registersempty();
 			((StoreState)state).updateTotalCustomers();
+			((StoreState)state).updateRealTime();
 
 			
 			//Lägg till i Queue ett nytt arrivalEvent
@@ -39,13 +40,15 @@ public class ArrivalEvent extends Event{
 
 		} else if (((StoreState)state).getOpenStatus() == "Ö" 
 			&& ((StoreState)state).getCustomersInStore() == ((StoreState)state).getMaxCapacity()) {
+			((StoreState)state).registersempty();
 			((StoreState)state).updateTotalCustomers();
+			((StoreState)state).updateRealTime();
 
 			
 			((StoreState)state).updateMissedCustomers(); // Ökar missade antalet kunder med 1
 			
 			//Lägg till i Queue ett nytt arrivalEvent
-			eventQueue.addToQueue(new ArrivalEvent((StoreState)state, eventQueue, ((StoreState)state).getArrivalTime(), ((StoreState)state).generatedCustomer(), 0));
+			eventQueue.addToQueue(new ArrivalEvent((StoreState)state, eventQueue, ((StoreState)state).getArrivalTime(), ((StoreState)state).generatedCustomer(), printall));
 			
 		}
 		((StoreState)state).updateLatestEventCustomer(customer.customerID);

@@ -66,10 +66,11 @@ public class View extends GeneralView {
 	            + "RESULTAT\n"
 	            + "========\n"
 	            + "1) Av " + storeState.getTotalCustomers() + " kunder handlade " + storeState.getPaidCustomers() + " medan " + storeState.getMissedCustomers() + " missades.\n"
-	            + "2) Total tid " + (storeState.getMaxCheckoutCapacity() - storeState.getCurrentInCheckout()) + " kassor varit lediga: " + String.format("%.2f", storeState.getEmptyQueueTime()) + " te. "
-	            + "Genomsnittlig ledig kassatid: " + String.format("%.4s", storeState.getEmptyQueueTime()/storeState.getMaxCheckoutCapacity()) + " te\n"
+	            + "2) Total tid " + (storeState.getMaxCheckoutCapacity() - storeState.getCurrentInCheckout()) + " kassor varit lediga: " + String.format("%.2f", storeState.getEmptyQueueTime()) + " te. \n"
+	            + "Genomsnittlig ledig kassatid: " + String.format("%.5s", storeState.getEmptyQueueTime()/storeState.getMaxCheckoutCapacity()) + " te "
+        		+ "(dvs. " + String.format("%.5s",((storeState.getEmptyQueueTime()/storeState.getMaxCheckoutCapacity()) / storeState.returnRealTime()) * 100) + "% " + "av tiden från öppning tills sista kunden\r\n"
 	            + "3) Total tid " + storeState.getTotalCustomersBeenInQueue() + " kunder tvingats köa: " + String.format("%.2f", storeState.getPopulatedQueueTime()) + " te.\n"
-	            + "Genomsnittlig kötid: " + String.format("%.4s", storeState.getPopulatedQueueTime()/storeState.getTotalCustomersBeenInQueue())+ " te.\n";
+	            + "Genomsnittlig kötid: " + String.format("%.5s", storeState.getPopulatedQueueTime()/storeState.getTotalCustomersBeenInQueue())+ " te.\n";
 	    System.out.print(closingMessage);
 	}
 	

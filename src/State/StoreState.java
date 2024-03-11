@@ -31,6 +31,7 @@ public class StoreState extends State {
 	private double populatedQueueTime;
 	private double emptyqueueTime;
 	protected int printall;
+	private double realTime;
 	
 	//TODO:
 	//Skapa alla updates/getter för alla olika store-variabler
@@ -201,20 +202,22 @@ public class StoreState extends State {
 			{
 				//double timetemp =  super.returnCurrentTime() - populatedQueueTime;
 				//populatedQueueTime += timetemp; 
-				populatedQueueTime = populatedQueueTime + (super.returnCurrentTime() - super.returnPreviousTime());
+				populatedQueueTime = (populatedQueueTime + ((super.returnCurrentTime() - super.returnPreviousTime()) * this.getCheckoutQueue().getSize()));
 			}
 		}
 		else // if the queue is empty, another timer is started to measure queued time spent in it.
 		{
 			if(emptyqueueTime == 0.0)
 			{
-				emptyqueueTime = super.returnCurrentTime() - super.returnPreviousTime();
+				emptyqueueTime = ((super.returnCurrentTime() - super.returnPreviousTime()) * (this.getMaxCheckoutCapacity() -  this.getCurrentInCheckout()));
 			}
 			else
 			{
+					emptyqueueTime = (emptyqueueTime + (super.returnCurrentTime() - super.returnPreviousTime()) * (this.getMaxCheckoutCapacity() - this.getCurrentInCheckout()));
+				
+				
 				//double timetemp = super.returnCurrentTime() - emptyqueueTime;
 				//emptyqueueTime += timetemp;
-				emptyqueueTime = emptyqueueTime + (super.returnCurrentTime() - super.returnPreviousTime());
 			}
 			
 		}
@@ -236,6 +239,14 @@ public class StoreState extends State {
 			this.currentInCheckout--;
 		}
 		
+	}
+
+	public void updateRealTime() {
+		this.realTime = this.currentTime;
+	}
+
+	public double returnRealTime() {
+		return this.realTime;
 	}
 
 }

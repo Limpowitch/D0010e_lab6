@@ -20,23 +20,30 @@ public class PayEvent extends Event{
 
 	public void execute() {
 		state.update(this);
-
+		((StoreState)state).updateRealTime();
 		//Uppdatera StoreState med relevant information
 		((StoreState)state).registersempty();
 
 		((StoreState)state).updateStoreCount(false); // minskar antalet i affären med 1
-		((StoreState)state).updatePaidCustomers(); // ökar antalet kunder som har betalat med 1
 		
 		if (((StoreState)state).getCheckoutQueue().getSize() > 0) {
+			((StoreState)state).updateLatestEventCustomer(customer.customerID);
+			((StoreState)state).updateLatestEvent("Pay");
+			if (printall == 1) {
+				state.notifyObserver();
+			}
 			eventQueue.addToQueue(new PayEvent((StoreState)state, ((StoreState)state).getPayTime(), eventQueue, ((StoreState)state).getCheckoutQueue().getFirstCustomer(), printall));
 		} else {
 			((StoreState)state).updateCurrentInCheckout(false);
+			((StoreState)state).updateLatestEventCustomer(customer.customerID);
+			((StoreState)state).updateLatestEvent("Pay");
+			if (printall == 1) {
+				state.notifyObserver();
+			}
 		}
-		((StoreState)state).updateLatestEventCustomer(customer.customerID);
-		((StoreState)state).updateLatestEvent("Pay");
-		if (printall == 1) {
-			state.notifyObserver();
-		}
+		((StoreState)state).updatePaidCustomers(); // ökar antalet kunder som har betalat med 1
+
+		
 
 
 

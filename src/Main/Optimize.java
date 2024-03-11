@@ -88,7 +88,7 @@ public class Optimize implements K{
 			}
 			
 
-			if(notFoundLower != 100) {
+			if(notFoundLower != 10) {
 				total = total + returnedValue;
 				indexCounter++;
 			} else {
