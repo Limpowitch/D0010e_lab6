@@ -35,18 +35,19 @@ public class CloseEvent extends Event {
      * Meddelar observatorer om handelsen.
      */
     public void execute() {
-        state.update(this);
+		state.update(this);
 
-        ((StoreState) state).setOpenStatus("S");
-        int customer = -1;
-        //Uppdatera StoreState med relevant information
-        ((StoreState) state).updateLatestEventCustomer(customer);
-        ((StoreState) state).updateLatestEvent("Close");
+		((StoreState)state).setOpenStatus("S");
+		int customer = -1;
+		//Uppdatera StoreState med relevant information
+		((StoreState)state).updateLatestEventCustomer(customer);
+		((StoreState)state).updateLatestEvent("Close");
+		((StoreState)state).registersempty();
+		
+		if (printall == 1) {
+			state.notifyObserver();
+		}
 
-        if (printall == 1) {
-            state.notifyObserver();
-        }
-
-    }
+	}
 
 }
