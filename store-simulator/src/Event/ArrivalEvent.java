@@ -47,38 +47,44 @@ public class ArrivalEvent extends Event {
         //Skapa customer
         state.update(this); //uppdaterar klockan
 
-        ((StoreState) state).registersempty();
-        //Kolla om affar ar oppen och att det inte ar fullt
-        if (((StoreState) state).getOpenStatus() == "Ö"
-                && ((StoreState) state).getCustomersInStore() < ((StoreState) state).getMaxCapacity()) {
-            ((StoreState) state).updateTotalCustomers();
+		//Kolla om affär är öppen och att det inte är fullt
+		if (((StoreState)state).getOpenStatus() == "Ö" 
+			&& ((StoreState)state).getCustomersInStore() < ((StoreState)state).getMaxCapacity() ) {
+			((StoreState)state).registersempty();
+			((StoreState)state).updateTotalCustomers();
+			((StoreState)state).updateRealTime();
 
+			
+			//Lägg till i Queue ett nytt arrivalEvent
+			eventQueue.addToQueue(new ArrivalEvent((StoreState)state, eventQueue, ((StoreState)state).getArrivalTime(), ((StoreState)state).generatedCustomer(), printall));
+			//Lägg till i Queue ett nytt pickEvent
+			eventQueue.addToQueue(new PickEvent((StoreState)state, ((StoreState)state).getPickTime(), eventQueue, customer, printall));
+			((StoreState)state).updateStoreCount(true); // ökar antalet i affären med 1
 
-            //Lagg till i Queue ett nytt arrivalEvent
-            eventQueue.addToQueue(new ArrivalEvent((StoreState) state, eventQueue, ((StoreState) state).getArrivalTime(), ((StoreState) state).generatedCustomer(), printall));
-            //Lagg till i Queue ett nytt pickEvent
-            eventQueue.addToQueue(new PickEvent((StoreState) state, ((StoreState) state).getPickTime(), eventQueue, customer, printall));
-            ((StoreState) state).updateStoreCount(true); // okar antalet i affaren med 1
+		} else if (((StoreState)state).getOpenStatus() == "Ö" 
+			&& ((StoreState)state).getCustomersInStore() == ((StoreState)state).getMaxCapacity()) {
+			((StoreState)state).registersempty();
+			((StoreState)state).updateTotalCustomers();
+			((StoreState)state).updateRealTime();
 
-        } else if (((StoreState) state).getOpenStatus() == "Ö"
-                && ((StoreState) state).getCustomersInStore() == ((StoreState) state).getMaxCapacity()) {
-            ((StoreState) state).updateTotalCustomers();
+			
+			((StoreState)state).updateMissedCustomers(); // Ökar missade antalet kunder med 1
+			
+			//Lägg till i Queue ett nytt arrivalEvent
+			eventQueue.addToQueue(new ArrivalEvent((StoreState)state, eventQueue, ((StoreState)state).getArrivalTime(), ((StoreState)state).generatedCustomer(), printall));
+			
+		}
+		((StoreState)state).updateLatestEventCustomer(customer.customerID);
+		((StoreState)state).updateLatestEvent("Arrival");
+		if (printall == 1) {
+			state.notifyObserver();
+		}
+		
+		
 
+		
+	}
 
-            ((StoreState) state).updateMissedCustomers(); // Ökar missade antalet kunder med 1
-
-            //Lagg till i Queue ett nytt arrivalEvent
-            eventQueue.addToQueue(new ArrivalEvent((StoreState) state, eventQueue, ((StoreState) state).getArrivalTime(), ((StoreState) state).generatedCustomer(), 0));
-
-        }
-        ((StoreState) state).updateLatestEventCustomer(customer.customerID);
-        ((StoreState) state).updateLatestEvent("Arrival");
-        if (printall == 1) {
-            state.notifyObserver();
-        }
-
-
-    }
-
-
+	
+	
 }
