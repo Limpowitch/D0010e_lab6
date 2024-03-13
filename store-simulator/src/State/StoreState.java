@@ -36,6 +36,8 @@ public class StoreState extends State {
     private double populatedQueueTime;
     private double emptyqueueTime;
     protected int printall;
+	private double realTime;
+
 
     /**
      * Skapar en ny StoreState instans.
@@ -74,7 +76,12 @@ public class StoreState extends State {
     public double getArrivalTime() {
         return arrivalTime.generateArrivalTime(returnCurrentTime());
     }
-
+    
+    /**
+     * Uppdaterar en variabel som anvands för att printa/inte printa affarsstatistik.
+     * 
+     * @param i
+     */
     public void updatePrintAll(int i) {
         this.printall = i;
     }
@@ -402,4 +409,20 @@ public class StoreState extends State {
             this.currentInCheckout--;
         }
     }
+    
+    /**
+     * Uppdaterar nuvarande "tiden" for simulatorn.
+     */
+	public void updateRealTime() {
+		this.realTime = this.currentTime;
+	}
+	
+	/**
+     * Hamtar nuvarande "tiden" for simulatorn.
+     * 
+     * @return Tiden.
+     */
+	public double returnRealTime() {
+		return this.realTime;
+	}
 }
