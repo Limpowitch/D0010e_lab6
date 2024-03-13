@@ -414,7 +414,7 @@ public class StoreState extends State {
      * Uppdaterar nuvarande "tiden" for simulatorn.
      */
 	public void updateRealTime() {
-		this.realTime = this.currentTime;
+		this.realTime = super.returnCurrentTime();
 	}
 
 	/**
