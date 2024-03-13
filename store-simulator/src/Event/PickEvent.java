@@ -40,27 +40,32 @@ public class PickEvent extends Event {
      * om handelsen.
      */
     public void execute() {
-        state.update(this);
-
-        //Om antalet kunder i kon inte ar max capacity
-        if (((StoreState) state).getCurrentInCheckout() != ((StoreState) state).getMaxCheckoutCapacity()) {
-            //Lagg till nytt payEvent
-            ((StoreState) state).updateCurrentInCheckout(true);
-            eventQueue.addToQueue(new PayEvent((StoreState) state, ((StoreState) state).getPayTime(), eventQueue, customer, printall));
-
-            //Om antalet kunder ar detsamma som max capacity
-        } else {
-            //Lagg till kund i ko
-            ((StoreState) state).updateBeenInQueue(); //okar antalet som har varit i kon med 1
-            ((StoreState) state).getCheckoutQueue().addCustomer(customer); // lagger in en kund i ko
-            ((StoreState) state).registersempty();
-        }
-        ((StoreState) state).updateLatestEventCustomer(customer.customerID);
-        ((StoreState) state).updateLatestEvent("Pick");
-        if (printall == 1) {
-            state.notifyObserver();
-        }
-
-
-    }
+		state.update(this);
+		((StoreState)state).updateRealTime();
+		//Om antalet kunder i kön inte är max capacity
+		//TODO: unfucka den här 
+		if (((StoreState)state).getCurrentInCheckout() != ((StoreState)state).getMaxCheckoutCapacity()) {
+			//TODO: Lägg till relevanta storestate updates
+			//Lägg till nytt payEvent
+			((StoreState)state).registersempty();
+			((StoreState)state).updateCurrentInCheckout(true);
+			eventQueue.addToQueue(new PayEvent((StoreState)state, ((StoreState)state).getPayTime(), eventQueue, customer, printall));
+			((StoreState)state).updateLatestEventCustomer(customer.customerID);
+			((StoreState)state).updateLatestEvent("Pick");
+			if (printall == 1) {
+				state.notifyObserver();
+			}
+		//Om antalet kunder är detsamma som max capacity
+		} else {
+			//Lägg till kund i kö
+			((StoreState)state).registersempty();
+			((StoreState)state).updateBeenInQueue(); //ökar antalet som har varit i kön med 1
+			((StoreState)state).updateLatestEventCustomer(customer.customerID);
+			((StoreState)state).updateLatestEvent("Pick");
+			if (printall == 1) {
+				state.notifyObserver();
+			}
+			((StoreState)state).getCheckoutQueue().addCustomer(customer); // lägger in en kund i kö
+		}
+	}
 }
